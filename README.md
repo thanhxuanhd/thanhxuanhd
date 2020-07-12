@@ -1,5 +1,12 @@
-### Hi there 👋
 
+## Hi there 👋 I'm Xuan Nguyen Thanh
+### If you have any questions, please let me know.
+
+😄 How to reach me:
+
+    ✉️ Email: thanhxuanhd007@gmail.com
+    📞 Skype: thanhxuanhd
+    📘 [Github Page](https://thanhxuanhd.github.io/)
 <!--
 **thanhxuanhd/thanhxuanhd** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
 
