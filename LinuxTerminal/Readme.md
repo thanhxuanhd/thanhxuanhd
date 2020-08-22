@@ -97,3 +97,85 @@ _To copy a directory from one place to another use -r or -R option in cp command
 _If the destination directory already has the same file, still you want to copy that file, to overwrite it use *-i*_
 >cat > dir_1/dir_2/file_4.txt - this is me. press ctrl+d<br>
 cp -i /dir_1/dir_2/file_4.txt /dir_1/dir_2/dir_3/dir_4
+
+13.  Move command- mv command to move the files one place to another
+> touch dir_1/dir_2/file_3.txt <br>
+mv -v dir_1/dir_2/file_3.txt dir_1/dir_2/dir_3
+
+14. Rename filename
+> touch latest.txt
+
+_want to change this file name latest to new_
+> mv latest.txt new.txt <br>
+rm latest.txt
+
+15. Search something 
+
+Need to install `sudo apt install mlocate`
+> locate new.txt
+
+_if you want to ignore the case_
+> locate -i New.txt
+
+_if you want a file that has the word "this"_
+> locate -i this
+
+_If you want the file(s) that has words "this" and "me"_
+> locate -i *this*me
+
+16. To view available disk space
+> df <br>
+_above command will show disk space in KB, to view in MB use the following command_<br>
+df -m
+
+17. To view disk usage by files
+> du
+
+_to view disk space used by a directory_
+> du dir_1
+
+18. To view Linux distro
+> uname <br>
+uname -a
+
+19. Package manager apt-get
+> sudo apt-get update <br>
+sudo apt-get install nginx -y
+
+20. To view your IP and name in host or network
+> hostname <br>
+hostname -I
+
+21. To know your user account
+> whoami
+
+22. To view user id, group id, group etc.
+> id
+
+23. Download a file from a link
+> curl www.randomlink.com/downloadable-file.txt -O <br>
+OR <br>
+wget www.randomlink.com/downloadable-file.txt -O downloadable-file
+
+24.  Service start/stop/enable/disable/restart/status
+> systemctl status nginx <br>
+systemctl restart nginx  <br>
+systemctl stop nginx <br>
+systemctl status nginx <br>
+systemctl start nginx  <br>
+systemctl disable nginx  <br>
+systemctl enable nginx
+
+25. To check connection to server
+> ping {ip address} <br>
+ping www.google.com
+
+26.  Bonus to read
+
+- Write clear to clean the terminal.
+- to autofill use TAB. Suppose you have a folder- my_folder and want to go to that folder, You just need to type cd my and then TAB and the terminal fills the rest up and makes it cd my_folder.
+- To stop a command write Ctrl+C
+- to force stop a command write Ctrl+Z
+- Write exit to exit from terminal
+
+Base on  https://dev.to/imabtiwari/linux-i-am-love-with-terminal-2n7p
