@@ -73,3 +73,110 @@ __Distributed Monoliths__
 
 
 
+
+### 3. Architecting Microservices
+
+3.1 __Evolving Towards Microservices(Hướng phát triển microservies)__
+
+- Augment a monolith
+    - Add new microservies
+- Decompose(phân tích ra) a monolith
+    - Extract microservies
+- Don't need to start with microservices
+    - It's hard to get servies boundaries(danh giới) right
+- Defining microservies responsibilities
+    - public interface
+
+3.2 __Microservices own their own data (Microservies sở hữu dữ liệu của chính nó)__
+
+- __Avoid__ sharing a data store
+
+__Mitigating data Ownership Limiteations__
+- Define servie boundaries well
+    - Minimize the need to aggregate data
+- Caching
+    - Improved performance
+    - Improved availability
+- Identity "seams" in the database
+
+3.3 __Component of Microservice__
+
+3.4 __Microservice Contracts__
+- Make additive changes
+    - New endpoints
+    - New properties on DTOs
+- Introduce version 2 API
+    - Version 1 clients must still be supported
+- Easily forgotten in development
+
+3.5 __Avoiding upgrade Issues__
+- Team ownership of microservices
+    - First, add a new capability
+    - Then deploy updated microservice
+    - Later, update clients
+- Create automated tests
+    - Ensure that older clients are supported
+    - Run as part of a CL build process
+- Beware of shared code
+    - Can result in tight coupling
+
+3.6 __Indentifying Microservies Boundaries__
+- Getting it wrong can be costly
+    - Poor performance
+    - Hard to change
+- Start from an existing system
+    - Identify loosely coupled components (xác định các thành phần liên kết lỏng lẻo)
+    - Identify database seams (Xác định đường nối cơ sở dữ liệu)
+
+__Domain Driven Design__
+- Identify "bounded contexts"
+    - Break up large domains
+    - "Ubiquitous language (Phổ cập)"
+    - Microservies don't share models
+- Sketch your ideas on a whiteboard
+    - Run them through real-world use cases
+    - Indentify potentical problems
+
+__Microservie Boundary pitfalls (cạm bẫy)__
+- Don't turn every noun into a microservices
+    - Anemic CRUD microservices
+    - Thin wrappers around database
+    - Logic distributed elsewhere
+- Avoid circular dependencies
+- Avoid chatty communications
+
+__Summary__
+- Evolving towards microservices
+- Microservices own their data
+- Microservices may consist of multiple processes
+- Microservices should be independently deployable
+- Avoid breaking changes
+- Indentify "bounded contexts" for microservice boundaries
+
+
+#### Buiding Microservies
+##### Microsoft Template
+
+    - Logging
+    - Health checks
+    - Configuration
+    - Authentication
+    - Build scripts
+
+    Benefits of Service Template
+        - Reduced time to create a new microservice
+        - Consistent tooling
+        - Increased developer productivity
+        - Ability to run the microservice in isolation
+        - Run in context of full application
+__Summary__
+
+ - Hosting microservices
+ - Using containers
+ - Source control and build
+ - Automated tests
+    - Unit tests
+    - Service level tests
+    - End-to-end tests
+- Standardizing(chuẩn hóa) microservices
+    - Service template
