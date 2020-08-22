@@ -120,6 +120,6 @@ When it comes to physical security – threats to cloud infrastructure, cloud pr
 
 Let us talk about digital security. You want only authorized users to be able to log into virtual machines or storage systems running in the cloud. Cloud providers offer tools that help you mitigate security threats, and you must use these tools to protect the resources you use.
 
-### 2.7 Summary
+### 2.8 Summary
 
 Cloud computing makes running a business easier. It's cost-effective, scalable, elastic, current, reliable, and secure. This means you're able to spend more time on what matters and less time managing the underlying details.
