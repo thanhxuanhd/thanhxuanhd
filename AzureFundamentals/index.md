@@ -239,3 +239,133 @@ Demand and growth can be unpredictable and can outpace expectation, which is a c
 With the OpEx model, companies wanting to try a new product or service don't need to invest in equipment. Instead, they pay as much or as little for the infrastructure as required.
 
 OpEx is particularly appealing if the demand fluctuates or is unknown. Cloud services are often said to be agile. Cloud agility is the ability to rapidly change an IT infrastructure to adapt to the evolving needs of the business. For example, if your service peaks one month, you can scale to demand and pay a larger bill for the month. If the following month the demand drops, you can reduce the used resources and be charged less. This agility lets you manage your costs dynamically, optimizing spending as requirements change.
+
+### Cloud deployment models
+
+####  Explore the three deployment methods of cloud computing
+
+__Public versus Private versus Hybrid__
+
+1. Public cloud
+
+This is the most common deployment model. In this case, you have no local hardware to manage or keep up-to-date – everything runs on your cloud provider's hardware. In some cases, you can save additional costs by sharing computing resources with other cloud users.
+
+Businesses can use multiple public cloud providers of varying scale. Microsoft Azure is an example of a public cloud provider.
+
+__Advantages__
+
+* High scalability/agility – you don't have to buy a new server in order to scale
+* Pay-as-you-go pricing – you pay only for what you use, no CapEx costs
+* You're not responsible for maintenance or updates of the hardware
+* Minimal technical knowledge to set up and use - you can leverage the skills and expertise of the cloud  provider to ensure workloads are secure, safe, and highly available
+
+A common use case scenario is deploying a web application or a blog site on hardware and resources that are owned by a cloud provider. Using a public cloud in this scenario allows cloud users to get their website or blog up quickly, and then focus on maintaining the site without having to worry about purchasing, managing or maintaining the hardware on which it runs.
+
+__Disadvantages__
+Not all scenarios fit the public cloud. Here are some disadvantages to think about:
+
+* There may be specific security requirements that cannot be met by using public cloud
+* There may be government policies, industry standards, or legal requirements which public clouds cannot meet
+* You don't own the hardware or services and cannot manage them as you may want to
+* Unique business requirements, such as having to maintain a legacy application might be hard to meet
+
+2. Private cloud
+
+In a private cloud, you create a cloud environment in your own datacenter and provide self-service access to compute resources to users in your organization. This offers a simulation of a public cloud to your users, but you remain completely responsible for the purchase and maintenance of the hardware and software services you provide.
+
+__Advantages__
+This approach has several advantages:
+
+* You can ensure the configuration can support any scenario or legacy application
+* You have control (and responsibility) over security
+* Private clouds can meet strict security, compliance, or legal requirements
+
+__Disadvantages__
+Some reasons teams move away from the private cloud are:
+
+* You have some initial CapEx costs and must purchase the hardware for startup and maintenance
+* Owning the equipment limits the agility - to scale you must buy, install, and setup new hardware
+* Private clouds require IT skills and expertise that's hard to come by
+
+A use case scenario for a private cloud would be when an organization has data that cannot be put in the public cloud, perhaps for legal reasons. An example scenario may be where government policy requires specific data to be kept in-country or privately.
+
+A private cloud can provide cloud functionality to external customers as well, or to specific internal departments such as Accounting or Human Resources.
+
+3. Hybrid cloud
+
+A hybrid cloud combines public and private clouds, allowing you to run your applications in the most appropriate location. For example, you could host a website in the public cloud and link it to a highly secure database hosted in your private cloud (or on-premises datacenter).
+
+This is helpful when you have some things that cannot be put in the cloud, maybe for legal reasons. For example, you may have some specific pieces of data that cannot be exposed publicly (such as medical data) which needs to be held in your private datacenter. Another example is one or more applications that run on old hardware that can't be updated. In this case, you can keep the old system running locally, and connect it to the public cloud for authorization or storage.
+
+__Advantages__
+Some advantages of a hybrid cloud are:
+
+* You can keep any systems running and accessible that use out-of-date hardware or an out-of-date operating system
+* You have flexibility with what you run locally versus in the cloud
+* You can take advantage of economies of scale from public cloud providers for services and resources where it's cheaper, and then supplement with your own equipment when it's not
+* You can use your own equipment to meet security, compliance, or legacy scenarios where you need to completely control the environment
+
+__Disadvantages__
+
+Some concerns you'll need to watch out for are:
+
+* It can be more expensive than selecting one deployment model since it involves some CapEx cost up front
+* It can be more complicated to set up and manage
+
+__Summary__
+
+Cloud computing is flexible and gives you the ability to choose how you want to deploy it. The cloud deployment model you choose depends on your budget, and on your security, scalability, and maintenance needs.
+
+### Types of cloud services
+
+Explore the three categories of cloud computing
+
+#### Infrastructure as a service (IaaS)
+
+Infrastructure as a Service is the most flexible category of cloud services. It aims (mục tiêu) to give you the most control over the provided hardware that runs your application (IT infrastructure servers and virtual machines (VMs), storage, and operating systems). Instead of buying hardware, with IaaS, you rent it. It's an instant computing infrastructure, provisioned and managed over the internet.
+
+>  __Note__ <br>
+When using IaaS, ensuring that a service is up and running is a shared responsibility: the cloud provider is responsible for ensuring the cloud infrastructure is functioning correctly; the cloud customer is responsible for ensuring the service they are using is configured correctly, is up to date, and is available to their customers. This is referred to as the __shared responsibility model__.
+
+IaaS is commonly used in the following scenarios:
+
+__Migrating workloads__. Typically, IaaS facilities are managed in a similar way as on-premises infrastructure and provide an easy migration path for moving existing applications to the cloud.
+
+__Test and development__. Teams can quickly set up and dismantle test and development environments, bringing new applications to market faster. IaaS makes scaling development and testing environments, fast and economical.
+
+__Storage, backup, and recovery.__ Organizations avoid the capital outlay and complexity of storage management, which typically requires skilled staff to manage data and meet legal and compliance requirements. IaaS is useful for managing unpredictable demand and steadily growing storage needs. IaaS can also simplify the planning and management of backup and recovery systems.
+
+#### Platform as a service (PaaS)
+
+PaaS provides an environment for building, testing, and deploying software applications. The goal of PaaS is to help you create an application quickly without managing the underlying infrastructure. For example, when deploying a web application using PaaS, you don't have to install an operating system, web server, or even system updates.
+
+PaaS is a complete development and deployment environment in the cloud, with resources that enable organizations to deliver everything from simple cloud-based apps to sophisticated cloud-enabled enterprise applications. Resources are purchased from a cloud service provider on a pay-as-you-go basis and accessed over a secure Internet connection.
+
+PaaS is commonly used in the following scenarios:
+
+__Development framework.__ PaaS provides a framework that developers can build upon to develop or customize cloud-based applications. Just like Microsoft Excel macro, PaaS lets developers create applications using built-in software components. Cloud features such as scalability, high-availability, and multi-tenant capability are included, reducing the amount of coding that developers must do.
+
+__Analytics or business intelligence.__ Tools provided as a service with PaaS allow organizations to analyze and mine their data. They can find insights and patterns, and predict outcomes to improve business decisions such as forecasting, product design, and investment returns.
+
+#### Software as a service (SaaS)
+
+SaaS is software that is centrally hosted and managed for the end customer. It is usually based on an architecture where one version of the application is used for all customers, and licensed through a monthly or annual subscription. Microsoft 365, Skype, and Dynamics CRM Online are perfect examples of SaaS software.
+
+__Cost and Ownership__
+
+| IaaS	| PaaS | SaaS |         |
+| -------- | ------- |  ------- | ------- |
+| Upfront costs |  There are no upfront costs. Users pay only for what they consume. | There are no upfront costs. Users pay only for what they consume.	| Users have no upfront costs; they pay a subscription, typically on a monthly or annual basis.
+User ownership |	The user is responsible for the purchase, installation, configuration, and management of their own software, operating systems, middleware, and applications.	| The user is responsible for the development of their own applications. However, they are not responsible for managing the server or infrastructure. This allows the user to focus on the application or workload they want to run. |	Users just use the application software; they are not responsible for any maintenance or management of that software.
+Cloud provider ownership |	The cloud provider is responsible for ensuring that the underlying cloud infrastructure (such as virtual machines, storage, and networking) is available for the user. |  The cloud provider is responsible for operating system management, network, and service configuration. Cloud providers are typically responsible for everything apart from the application that a user wants to run. They provide a complete managed platform on which to run the application. | The cloud provider is responsible for the provision, management, and maintenance of the application software.
+
+#### Management responsibilities
+
+* IaaS requires the most user management of all the cloud services. The user is responsible for managing the operating systems, data, and applications.
+* PaaS requires less user management. The cloud provider manages the operating systems, and the user is responsible for the applications and data they run and store.
+* SaaS requires the least amount of management. The cloud provider is responsible for managing everything, and the end user just uses the software.
+
+#### Combine cloud services to fit your needs
+
+IaaS, PaaS, and SaaS each contain different levels of managed services. You may easily use a combination of these types of infrastructure. You could use Microsoft 365 on your company's computers (SaaS), and in Azure, you could host your VMs (IaaS) and use Azure SQL Database (PaaS) to store your data. With the cloud's flexibility, you can use any combination that provides you with the maximum result.
+
