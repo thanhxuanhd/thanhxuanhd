@@ -243,3 +243,340 @@ In addition to managing Azure resource access with role-based access control (RB
 Identity allows us to maintain a security perimeter, even outside our physical control. With single sign-on and appropriate role-based access configuration, we can always be sure who has the ability to see and manipulate our data and infrastructure.
 
 ### Encryption
+
+For most organizations, data is the most valuable and irreplaceable asset. Encryption serves as the last and strongest line of defense in a layered security strategy.
+
+Contoso Shipping knows that encryption is the only protection its data has once it leaves the data center and is stored on mobile devices that could potentially be hacked or stolen.
+
+#### What is encryption?
+Encryption is the process of making data unreadable and unusable to unauthorized viewers. To use or read the encrypted data, it must be _decrypted_, which requires the use of a secret key. There are two top-level types of encryption: __symmetric__ and __asymmetric__.
+
+__Symmetric encryption__ uses the same key to encrypt and decrypt the data. Consider a desktop password manager application. You enter your passwords and they are encrypted with your own personal key (your key is often derived from your master password). When the data needs to be retrieved, the same key is used, and the data is decrypted.
+
+__Asymmetric encryption__ uses a public key and private key pair. Either key can encrypt but a single key can't decrypt its own encrypted data. To decrypt, you need the paired key. Asymmetric encryption is used for things like Transport Layer Security (TLS) (used in HTTPS) and data signing.
+
+Both symmetric and asymmetric encryption play a role in properly securing your data. Encryption is typically approached in two ways:
+
+1. Encryption at rest
+2. Encryption in transit
+
+#### Encryption at rest
+
+Data at rest is the data that has been stored on a physical medium. This data could be stored on the disk of a server, data stored in a database, or data stored in a storage account. Regardless of the storage mechanism, encryption of data at rest ensures that the stored data is unreadable without the keys and secrets needed to decrypt it. If an attacker was to obtain a hard drive with encrypted data and did not have access to the encryption keys, the attacker would not compromise the data without great difficulty.
+
+The actual data that is encrypted could vary in its content, usage, and importance to the organization. This financial information could be critical to the business, intellectual property that has been developed by the business, personal data about customers or employees that the business stores, and even the keys and secrets used for the encryption of the data itself.
+
+Here's a diagram that shows what encrypted customer data might look like as it sits in a database.
+
+#### Encryption in transit
+
+Data in transit is the data actively moving from one location to another, such as across the internet or through a private network. Secure transfer can be handled by several different layers. It could be done by encrypting the data at the application layer prior to sending it over a network. HTTPS is an example of application layer in transit encryption.
+
+You can also set up a secure channel, like a virtual private network (VPN), at a network layer, to transmit data between two systems.
+
+Encrypting data in transit protects the data from outside observers and provides a mechanism to transmit data while limiting risk of exposure.
+
+This diagram shows the process. Here, customer data is encrypted as it's sent over the network. Only the receiver has the secret key that can decrypt the data to a usable form.
+
+#### Encryption on Azure
+
+Let's take a look at some ways that Azure enables you to encrypt data across services.
+1. Encrypt raw storage
+
+    __Azure Storage Service Encryption__ for data at rest helps you protect your data to meet your organizational security and compliance commitments. With this feature, the Azure storage platform automatically encrypts your data before persisting it to Azure Managed Disks, Azure Blob storage, Azure Files, or Azure Queue storage, and decrypts the data before retrieval. The handling of encryption, encryption at rest, decryption, and key management in Storage Service Encryption is transparent to applications using the services.
+2. Encrypt virtual machine disks
+
+    Storage Service Encryption provides low-level encryption protection for data written to physical disk, but how do you protect the virtual hard disks (VHDs) of virtual machines? If malicious attackers gained access to your Azure subscription and got the VHDs of your virtual machines, how would you ensure they would be unable to access the stored data?
+
+    Azure Disk Encryption is a capability that helps you encrypt your Windows and Linux IaaS virtual machine disks. Azure Disk Encryption leverages the industry-standard BitLocker feature of Windows and the dm-crypt feature of Linux to provide volume encryption for the OS and data disks. The solution is integrated with Azure Key Vault to help you control and manage the disk encryption keys and secrets (and you can use managed service identities for accessing Key Vault).
+
+    For Contoso Shipping, using VMs was one of the first moves toward the cloud. Having all the VHDs encrypted is an easy, low-impact way to ensure that you are doing all you can to secure your company's data.
+3. Encrypt databases
+    __Transparent data encryption (TDE)__ helps protect Azure SQL Database and Azure Data Warehouse against the threat of malicious activity. It performs real-time encryption and decryption of the database, associated backups, and transaction log files at rest without requiring changes to the application. By default, TDE is enabled for all newly deployed Azure SQL Database instances.
+
+    TDE encrypts the storage of an entire database by using a symmetric key called the database encryption key. By default, Azure provides a unique encryption key per logical SQL Server instance and handles all the details. Bring your own key (BYOK) is also supported with keys stored in Azure Key Vault (see below).
+
+    Because TDE is enabled by default, you are confident that Contoso Shipping has the proper protections in place for data stored in the company's databases.
+4. Encrypt secrets
+    We've seen that the encryption services all use keys to encrypt and decrypt data, so how do we ensure that the keys themselves are secure? Corporations may also have passwords, connection strings, or other sensitive pieces of information that they need to securely store. In Azure, we can use __Azure Key Vault__ to protect our secrets.
+
+    Azure Key Vault is a centralized cloud service for storing your application secrets. Key Vault helps you control your applications' secrets by keeping them in a single, central location and by providing secure access, permissions control, and access logging capabilities. It is useful for a variety of scenarios:
+    
+    * Secrets management. You can use Key Vault to securely store and tightly control access to tokens, passwords, certificates, Application Programming Interface (API) keys, and other secrets.
+    * Key management. You also can use Key Vault as a key management solution. Key Vault makes it easier to create and control the encryption keys used to encrypt your data.
+    * Certificate management. Key Vault lets you provision, manage, and deploy your public and private Secure Sockets Layer/ Transport Layer Security (SSL/ TLS) certificates for your Azure, and internally connected, resources more easily.
+    * Store secrets backed by hardware security modules (HSMs). The secrets and keys can be protected either by software, or by FIPS 140-2 Level 2 validated HSMs.
+
+    The benefits of using Key Vault include:
+
+    * Centralized application secrets. Centralizing storage for application secrets allows you to control their distribution, and reduces the chances that secrets may be accidentally leaked.
+    * Securely stored secrets and keys. Azure uses industry-standard algorithms, key lengths, and HSMs, and access requires proper authentication and authorization.
+    * Monitor access and use. Using Key Vault, you can monitor and control access to company secrets.
+    * Simplified administration of application secrets. Key Vault makes it easier to enroll and renew certificates from public Certificate Authorities (CAs). You can also scale up and replicate content within regions, and use standard certificate management tools.
+    * Integrate with other Azure services. You can integrate Key Vault with storage accounts, container registries, event hubs, and many more Azure services.
+
+Because Azure AD identities can be granted access to use Azure Key Vault secrets, applications with managed service identities enabled can automatically and seamlessly acquire the secrets they need.
+
+#### Summary
+As you may know, encryption is often the last layer of defense from attackers and is an important piece of a layered approach to securing your systems. Azure provides built-in capabilities and services to encrypt and protect data from unintended exposure. Protection of customer data stored within Azure services is of paramount importance to Microsoft and should be included in any design. Foundational services such as Azure Storage, Azure Virtual Machines, Azure SQL Database, and Azure Key Vault can help secure your environment through encryption.
+
+### Overview of Azure certificates
+
+As mentioned previously, Transport Layer Security (TLS) is the basis for encryption of website data in transit. TLS uses _certificates_ to encrypt and decrypt data. However, these certificates have a lifecycle that requires administrator management. A common security problem with websites is having expired TLS certificates that open security vulnerabilities.
+
+Certificates used in Azure are __x.509__ v3 and can be signed by a trusted certificate authority, or they can be self-signed. A self-signed certificate is signed by its own creator; therefore, it is not trusted by default. Most browsers can ignore this problem. However, you should only use self-signed certificates when developing and testing your cloud services. These certificates can contain a private or a public key and have a thumbprint that provides a means to identify a certificate in an unambiguous way. This thumbprint is used in the Azure configuration file to identify which certificate a cloud service should use.
+
+#### Types of certificates
+Certificates are used in Azure for two primary purposes and are given a specific designation based on their intended use.
+
+1. __Service certificates__ are used for cloud services
+2. __Management certificates__ are used for authenticating with the management API
+
+#### Service certificates
+Service certificates are attached to cloud services and enable secure communication to and from the service. For example, if you deploy a web site, you would want to supply a certificate that can authenticate an exposed HTTPS endpoint. Service certificates, which are defined in your service definition, are automatically deployed to the VM that is running an instance of your role.
+
+You can upload service certificates to Azure either using the Azure portal or by using the classic deployment model. Service certificates are associated with a specific cloud service. They are assigned to a deployment in the service definition file.
+
+You can manage service certificates separately from your services, and you can have different people managing them. For example, a developer could upload a service package that refers to a certificate that an IT manager has previously uploaded to Azure. An IT manager can manage and renew that certificate (changing the configuration of the service) without needing to upload a new service package. Updating without a new service package is possible because the logical name, store name, and location of the certificate is in the service definition file, while the certificate thumbprint is specified in the service configuration file. To update the certificate, it's only necessary to upload a new certificate and change the thumbprint value in the service configuration file.
+
+#### Management certificates
+
+Management certificates allow you to authenticate with the classic deployment model. Many programs and tools (such as Visual Studio or the Azure SDK) use these certificates to automate configuration and deployment of various Azure services. However, these types of certificates are not related to cloud services.
+
+#### Using Azure Key Vault with certificates
+
+You can store your certificates in Azure Key Vault - much like any other secret. However, Key Vault provides additional features above and beyond the typical certificate management.
+
+* You can create certificates in Key Vault, or import existing certificates
+* You can securely store and manage certificates without interaction with private key material.
+* You can create a policy that directs Key Vault to manage the life cycle of a certificate.
+* You can provide contact information for notification about life-cycle events of expiration and renewal of certificate.
+* You can automatically renew certificates with selected issuers - Key Vault partner x509 certificate providers / certificate authorities.
+
+Automating certificate management helps to reduce or eliminate the error prone task of manual certificate management.
+
+### Protect your network
+Securing your network from attacks and unauthorized access is an important part of any architecture. Here, we'll take a look at what network security looks like, how to integrate a layered approach into your architecture, and how Azure can help you provide network security for your environment.
+
+#### A layered approach to network security
+
+You've probably noticed that a common theme throughout this module is the emphasis of a layered approach to security. This approach is also recommended at the network layer. It's not enough to just focus on securing the network perimeter, or focusing on the network security between services inside a network. A layered approach provides multiple levels of protection, so that if an attacker gets through one layer, there are further protections in place to limit further attack.
+
+Let's take a look at how Azure can provide the tools for a layered approach to securing your network footprint.
+
+__Internet protection__
+
+If we start on the perimeter of the network, we're focused on limiting and eliminating attacks from the internet. We suggest first assessing the resources that are internet-facing, and to only allow inbound and outbound communication where necessary. Make sure you identify all resources that are allowing inbound network traffic of any type, and then ensure they are restricted to only the ports and protocols required. Azure Security Center is a great place to look for this information, because it will identify internet-facing resources that don't have network security groups associated with them, as well as resources that are not secured behind a _firewall_.
+
+#### What is a Firewall?
+
+A firewall is a service that grants server access based on the originating IP address of each request. You create firewall rules that specify ranges of IP addresses. Only clients from these granted IP addresses will be allowed to access the server. Firewall rules, generally speaking, also include specific network protocol and port information.
+
+To provide inbound protection at the perimeter, you have several choices.
+
+* __Azure Firewall__ is a managed, cloud-based, network security service that protects your Azure Virtual Network resources. It is a fully stateful firewall as a service with built-in high availability and unrestricted cloud scalability. Azure Firewall provides inbound protection for non-HTTP/S protocols. Examples of non-HTTP/S protocols include: Remote Desktop Protocol (RDP), Secure Shell (SSH), and File Transfer Protocol (FTP). It also provides outbound, network-level protection for all ports and protocols, and application-level protection for outbound HTTP/S.
+
+* __Azure Application Gateway__ is a load balancer that includes a Web Application Firewall (WAF) that provides protection from common, known vulnerabilities in websites. It is designed to protect HTTP traffic.
+
+* __Network virtual appliances (NVAs)__ are ideal options for non-HTTP services or advanced configurations, and are similar to hardware firewall appliances.
+
+#### Stopping Distributed Denial of Service (DDoS) attacks
+
+Any resource exposed on the internet is at risk of being attacked by a denial of service attack. These types of attacks attempt to overwhelm a network resource by sending so many requests that the resource becomes slow or unresponsive.
+
+When you combine __Azure DDoS Protection__ with application design best practices, you help provide defense against DDoS attacks. DDoS Protection leverages the scale and elasticity of Microsoft's global network to bring DDoS mitigation capacity to every Azure region. The Azure DDoS Protection service protects your Azure applications by monitoring traffic at the Azure network edge before it can impact your service's availability. Within a few minutes of attack detection, you are notified using Azure Monitor metrics.
+
+This diagram shows network traffic flowing into Azure from both customers and an attacker. Azure DDoS protection identifies the attacker's attempt to overwhelm the network and blocks further traffic from reaching Azure services. Legitimate traffic from customers still flows into Azure without any interruption of service.
+
+Azure DDoS Protection provides the following service tiers:
+
+* Basic - The Basic service tier is automatically enabled as part of the Azure platform. Always-on traffic monitoring and real-time mitigation of common network-level attacks provide the same defenses that Microsoft's online services use. Azure's global network is used to distribute and mitigate attack traffic across regions.
+* Standard - The Standard service tier provides additional mitigation capabilities that are tuned specifically to Microsoft Azure Virtual Network resources. DDoS Protection Standard is simple to enable and requires no application changes. Protection policies are tuned through dedicated traffic monitoring and machine learning algorithms. Policies are applied to public IP addresses associated with resources deployed in virtual networks, such as Azure Load Balancer and Application Gateway. DDoS standard protection can mitigate the following types of attacks:
+
+    * Volumetric attacks. The attackers goal is to flood the network layer with a substantial amount of seemingly legitimate traffic.
+    * Protocol attacks. These attacks render a target inaccessible, by exploiting a weakness in the layer 3 and layer 4 protocol stack.
+    * Resource (application) layer attacks. These attacks target web application packets to disrupt the transmission of data between hosts.
+
+#### Controlling the traffic inside your virtual network
+
+__Virtual network security__
+
+Once inside a virtual network (VNet), it's crucial that you limit communication between resources to only what is required.
+
+For communication between virtual machines, _Network Security Groups _(NSGs) are a critical piece to restrict unnecessary communication.
+
+Network Security Groups allow you to filter network traffic to and from Azure resources in an Azure virtual network. An NSG can contain multiple inbound and outbound security rules that enable you to filter traffic to and from resources by source and destination IP address, port, and protocol. They provide a list of allowed and denied communication to and from network interfaces and subnets, and are fully customizable.
+
+You can completely remove public internet access to your services by restricting access to service endpoints. With service endpoints, Azure service access can be limited to your virtual network.
+
+__Network integration__
+It's common to have existing network infrastructure that needs to be integrated to provide communication from on-premises networks or to provide improved communication between services in Azure. There are a few key ways to handle this integration and improve the security of your network.
+
+Virtual private network (VPN) connections are a common way of establishing secure communication channels between networks. Connections between Azure Virtual Network and an on-premises VPN device are a great way to provide secure communication between your network and your VNet on Azure.
+
+To provide a dedicated, private connection between your network and Azure, you can use Azure ExpressRoute. ExpressRoute lets you extend your on-premises networks into the Microsoft cloud over a private connection facilitated by a connectivity provider. With ExpressRoute, you can establish connections to Microsoft cloud services, such as Microsoft Azure, Microsoft 365, and Dynamics 365. ExpressRoute connections improve the security of your on-premises communication by sending this traffic over the private circuit instead of over the public internet. You don't need to allow access to these services for your end users over the public internet, and you can send this traffic through appliances for further traffic inspection.
+
+#### Summary
+A layered approach to network security helps reduce your risk of exposure through network-based attacks. Azure provides several services and capabilities to secure your internet-facing resource, internal resources, and communication between on-premises networks. These features make it possible to create secure solutions on Azure.
+
+You can also combine multiple Azure networking and security services to manage your network security and provide increased layered protection. For example, you can use Azure Firewall to protect inbound and outbound traffic to the Internet, and Network Security Groups to limit traffic to resources inside your virtual networks.
+
+### Protect your shared documents
+
+__Microsoft Azure Information Protection__ (sometimes referred to as AIP) is a cloud-based solution that helps organizations classify and optionally protect documents and emails by applying labels.
+
+Labels can be applied automatically based on rules and conditions. Labels can also be applied manually. You can also guide users to choose recommended labels with a combination of automatic and manual steps.
+
+The following screen capture is an example of AIP in action on a user's computer. In this example, the administrator has configured a label with rules that detect sensitive data. When a user saves a Microsoft Word document containing a credit card number, a custom tooltip is displayed. The tooltip recommends labeling the file as Confidential \ All Employees. This label is configured by the administrator. Using this label classifies the document and protects it.
+
+After your content is classified, you can track and control how the content is used. For example, you can:
+
+* Analyze data flows to gain insight into your business
+* Detect risky behaviors and take corrective measures
+* Track access to documents
+* Prevent data leakage or misuse of confidential information
+
+### Azure Advanced Threat Protection
+
+__Azure Advanced Threat Protection__ (Azure ATP) is a cloud-based security solution that identifies, detects, and helps you investigate advanced threats, compromised identities, and malicious insider actions directed at your organization.
+
+Azure ATP is capable of detecting known malicious attacks and techniques, security issues, and risks against your network.
+
+#### Azure ATP components
+Azure ATP consists of several components.
+
+#### Azure ATP portal
+
+Azure ATP has its own portal, through which you can monitor and respond to suspicious activity. The Azure ATP portal allows you to create your Azure ATP instance, and view the data received from Azure ATP sensors. You can also use the portal to monitor, manage, and investigate threats in your network environment. You can sign in to the Azure ATP portal at https://portal.atp.azure.com . Your user accounts must be assigned to an Azure AD security group that has access to the Azure ATP portal to be able to sign in.
+
+#### Azure ATP sensor
+Azure ATP sensors are installed directly on your domain controllers. The sensor monitors domain controller traffic without requiring a dedicated server or configuring port mirroring.
+
+#### Azure ATP cloud service
+Azure ATP cloud service runs on Azure infrastructure and is currently deployed in the United States, Europe, and Asia. Azure ATP cloud service is connected to Microsoft's intelligent security graph.
+
+#### Purchasing Azure Advanced Threat Protection
+Azure ATP is available as part of the Enterprise Mobility + Security E5 suite (EMS E5) and as a standalone license. You can acquire a license directly from the Enterprise Mobility + Security Pricing Options page or through the Cloud Solution Provider (CSP) licensing model. It is not available to purchase via the Azure portal.
+
+### Understand Security Considerations for Application Lifecycle Management Solutions
+The Microsoft Security Development Lifecycle (SDL) introduces security and privacy considerations throughout all phases of the development process. It helps developers build highly secure software, address security compliance requirements, and reduce development costs. The guidance, best practices, tools, and processes in the SDL are practices used internally at Microsoft to build more secure products and services.
+
+Since first sharing the SDL in 2008, the practices have been continuously updated to cover new scenarios such as cloud services, IoT, and AI.
+
+#### Provide training
+
+Security is everyone's job. Developers, service engineers, and program and project managers must understand security basics. They all must know how to build security into software and services to make products more secure, while still addressing business needs and delivering user value. Effective training will complement and reinforce security policies, SDL practices, standards, and requirements of software security, and be guided by insights derived through data or newly available technical capabilities.
+
+Although security is everyone's job, it's important to remember that not everyone needs to be a security expert nor strive to become a proficient penetration tester. However, ensuring everyone understands the attacker's perspective, their goals, and the art of the possible will help capture the attention of everyone and raise the collective knowledge bar.
+
+#### Define security requirements
+
+Security and privacy is a fundamental aspect of developing highly secure applications and systems. Regardless of development methodology in use, security requirements must be updated continuously in order to address changes in required functionality and changes to the threat landscape. The optimal time to define the security requirements is during the initial design and planning stages. Early planning allows development teams to integrate security in ways that minimize disruption.
+
+Factors that influence security requirements include, but are not limited to:
+
+* Legal and industry requirements
+* Internal standards and coding practices
+* Review of previous incidents
+* Known threats
+
+These requirements should be tracked through a work-tracking system, or through telemetry that is derived from the engineering pipeline.
+
+#### Define metrics and compliance reporting
+It's essential for an organization to define the minimum acceptable levels of security quality, and to hold engineering teams accountable to meeting that criteria. Defining these expectations early helps a team understand the risks that are associated with security issues, identify and fix security defects during development, and apply the standards throughout the entire project. Setting a meaningful security bar involves clearly defining the severity thresholds of security vulnerabilities, and helps to establish a plan of action when vulnerabilities are encountered. For example, all known vulnerabilities discovered with a "critical" or "important" severity rating must be fixed with a specified time frame.
+
+To track key performance indicators (KPIs) and ensure security tasks are completed, bug tracking and/or work tracking mechanisms used by an organization (such as Azure DevOps) should allow for security defects and security work items to be clearly labeled as security, and marked with their appropriate security severity. This tracking allows for accurate tracking and reporting of security work.
+
+You can read more about defining metrics and compliance reporting at:
+
+* SDL Privacy Bug Bar Sample
+* Add or modify an Azure DevOps field to track work
+* SDL Security Bug Bar Sample
+
+#### Perform threat modeling
+Threat modeling should be used in environments where there is a meaningful security risk. As a practice, it allows development teams to consider, document, and discuss the security implications of designs in the context of their planned operational environment, and in a structured fashion. Applying a structured approach to threat scenarios helps a team more effectively and less expensively identify security vulnerabilities, determine risks from those threats, and then make security feature selections and establish appropriate mitigations. You can apply threat modeling at the component, application, or system level.
+
+More information is available at Threat Modeling.
+
+#### Establish design requirements
+
+The SDL is typically thought of as assurance activities that help engineers implement more secure features, meaning the features are well engineered for security. To achieve this assurance, engineers typically rely on security features such as cryptography, authentication, and logging. In many cases, selecting or implementing security features has proven to be so complicated that design or implementation choices are likely to result in vulnerabilities. Therefore, it's crucial that they are applied consistently and with a consistent understanding of the protection they provide.
+
+#### Define and use cryptography standards
+
+With the rise of mobile and cloud computing, it's important to ensure all data - including security-sensitive information and management and control data - are protected from unintended disclosure or alteration when it's being transmitted or stored. Encryption is typically used to achieve this protection. However, making an incorrect choice when using any aspect of cryptography can be catastrophic. Therefore, it's best to develop clear encryption standards that provide specifics on every element of the encryption implementation.
+
+Encryption should be left to experts. A good general rule is to only use industry-vetted encryption libraries and ensure they're implemented in a way that allows them to be easily replaced if needed.
+
+For more information on encryption, see the Microsoft SDL Cryptographic Recommendations whitepaper.
+
+#### Manage security risks from using third-party components
+The vast majority of software projects today are built using third-party components (both commercial and open source). When selecting which third-party components to use, it's important to understand the impact that a security vulnerability in them could have to the security of the larger system into which they are integrated. Having an accurate inventory of these components, and a plan to respond when new vulnerabilities are discovered, will go a long way toward mitigating risks. However, you should also consider additional validation, depending on your organization's risk tolerance, the type of component being used, and potential impact of a security vulnerability.
+
+Learn more about managing the security risks of using third-party components at:
+
+Managing Security Risks Inherent in the Use of Third-Party Components
+Managing Security Risks Inherent in the Use of Open-Source Software
+
+#### Use approved tools
+
+Define and publish a list of approved tools and their associated security checks, such as compiler/linker options and warnings. Engineers should strive to use the latest version of approved tools (such as compiler versions), and to utilize new security analysis functionality and protections.
+
+For more information, see:
+
+Recommended Tools, Compilers and Options for x86, x64, and ARM processors (whitepaper)
+SDL Resources
+
+#### Perform Static Analysis Security Testing
+Analyzing source code prior to compilation provides a highly scalable method of security code review, and helps ensure that secure coding policies are being followed. Static Analysis Security Testing (SAST) is typically integrated into the commit pipeline to identify vulnerabilities each time the software is built or packaged. However, some offerings integrate into the developer environment to spot certain flaws such as the existence of unsafe or other banned functions, and then replace those functions with safer alternatives while the developer is actively coding. There is no one-size-fits-all solution; development teams should decide the optimal frequency for performing SAST, and consider deploying multiple tactics to balance productivity with adequate security coverage.
+
+More information is available at:
+
+* Microsoft DevSkim on GitHub
+* Roslyn Security Guard Rules
+* Visual Studio Marketplace
+* Analyzing C/C++ Code Quality by Using Code Analysis
+* Microsoft BinSkim on GitHub
+
+Perform Dynamic Analysis Security Testing
+Performing run-time verification of your fully compiled or packaged software checks functionality that is only apparent when all components are integrated and running. This verification is typically achieved using a tool, a suite of pre-built attacks, or tools that specifically monitor application behavior for memory corruption, user privilege issues, and other critical security problems. Similar to SAST, there is no one-size-fits-all solution and while some tools (such as web app scanning tools) can be more readily integrated into the CI/CD pipeline, other Dynamic Application Security Testing (DAST) such as fuzzing requires a different approach.
+
+More information is available at:
+
+Visual Studio Marketplace
+Automated Penetration Testing with White-Box Fuzzing
+
+#### Perform penetration testing
+
+Penetration testing is a security analysis of a software system that is performed by skilled security professionals who simulate the actions of a hacker. The objective of a penetration test is to uncover potential vulnerabilities resulting from coding errors, system configuration faults, or other operational deployment weaknesses. Penetration tests typically find the broadest variety of vulnerabilities, and are often performed in conjunction with automated and manual code reviews to provide a greater level of analysis than would ordinarily be possible.
+
+More information is available at:
+
+Attack Surface Analyzer
+SDL Security Bug Bar Sample
+
+#### Establish a standard incident response process
+Preparing an incident response plan is crucial for addressing new threats that can emerge over time, and your plan should be created in coordination with your organization's dedicated Product Security Incident Response Team (PSIRT). Your incident response plan should:
+
+* Include who to contact if a security emergency occurs
+* Establish the protocol for security servicing (including plans for code inherited from other groups within the organization and for third-party code)
+* Be tested before it is needed
+
+For more information about incident responses, see:
+
+* Using Azure Security Center for an incident response
+* Microsoft Incident Response and shared responsibility for cloud computing
+* Microsoft Security Response Center
+By introducing standardized security and compliance considerations throughout all phases of the development process, developers can reduce the likelihood of vulnerabilities in products and services, and avoid repeating the same security mistakes. Similarly, security integration throughout the operations lifecycle will assist in maintaining the integrity of those products and services. Operational Security Assurance practices should align with your development processes; this arrangement will result in less time and cost spent on triage and response after the fact, and provide your customers with assurance that your products are highly secure.
+
+#### Summary
+
+In this module, we discussed the basic concepts for protecting your infrastructure and data when you work in the cloud.
+
+Defense in depth is the overriding theme - think about security as a multi-layer, multi-vector concern. Threats come from places we don't expect, and they can come with strength that will surprise us.
+
+Azure has out-of-the-box help for a great deal of the security issues we face. One of the first steps we should take is assessing how much help from Azure we can use based on whether we're leveraging IaaS, PaaS, or SaaS.
+
+Azure Security Center centralizes much of the help Azure has to offer. It provides a single dashboard, with a view into many of your services, and helps make sure you are following best practices. Continuously updated machine learning algorithms help identify whether the latest threats are aimed at your resources. And it helps your organization mitigate threats.
+
+This module is only introductory. Security is a deep and complex topic, so whatever your cloud approach, an ongoing security education is necessary. But this module should get you started in the right direction, so you know what you need to learn next.
