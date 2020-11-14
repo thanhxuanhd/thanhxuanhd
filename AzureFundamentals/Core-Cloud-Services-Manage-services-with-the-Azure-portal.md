@@ -1,4 +1,5 @@
 ### Introduction
+
 Azure is a cloud platform that provides the compute, storage, and networking resources needed to build cloud-hosted applications. As a new user, the Azure portal is likely to be the primary way you will interact with Azure. The Azure portal lets you create and manage all your Azure resources. For example, you can set up a new database, increase the compute power of your virtual machines, and monitor your monthly costs. It's also a great learning tool since you can survey all available resources and use guided wizards to create the ones you need.
 
 Here you will learn how to sign in to the portal and navigate the portal interface. You will also learn how to customize the dashboard, so it is convenient to locate and monitor your most essential services.
@@ -8,10 +9,11 @@ Here you will learn how to sign in to the portal and navigate the portal interfa
 You can configure and manage Azure using a broad range of tools and platforms. There are tools available for the command line, language-specific Software Development Kits (SDKs), developer tools, tools for migration, and many others.
 
 Tools that are commonly used for day-to-day management and interaction include:
-* __Azure portal__ for interacting with Azure via a Graphical User Interface (GUI)
-* __Azure PowerShell__ and __Azure Command-Line Interface__ (CLI) for command line and automation-based interactions with Azure
-* __Azure Cloud Shell__ for a web-based command-line interface
-* __Azure mobile app__ for monitoring and managing your resources from your mobile device
+
+- **Azure portal** for interacting with Azure via a Graphical User Interface (GUI)
+- **Azure PowerShell** and **Azure Command-Line Interface** (CLI) for command line and automation-based interactions with Azure
+- **Azure Cloud Shell** for a web-based command-line interface
+- **Azure mobile app** for monitoring and managing your resources from your mobile device
 
 #### Azure portal
 
@@ -22,10 +24,10 @@ The dashboard view provides high-level details about your Azure environment. You
 The portal doesn't provide any way to automate repetitive tasks. For example, to set up multiple VMs, you would need to create them one at a time by completing the wizard for each VM. This process makes the portal approach time-consuming and error-prone for complex tasks.
 
 #### Azure PowerShell
+
 Azure PowerShell is a module that you can install for Windows PowerShell or PowerShell Core, which is a cross-platform version of PowerShell that runs on Windows, Linux, or macOS. Azure PowerShell enables you to connect to your Azure subscription and manage resources. Windows PowerShell and PowerShell Core provide services such as the shell window and command parsing. Azure PowerShell then adds the Azure-specific commands.
 
 For example, Azure PowerShell provides the `New-AzVM` command that creates a virtual machine for you inside your Azure subscription. To use it, you would launch PowerShell, install the Azure PowerShell module, sign in to your Azure account using the command `Connect-AzAccount`, and then issue a command such as:
-
 
 ```PowerShell
 New-AzVM `
@@ -51,15 +53,16 @@ Azure CLI is a cross-platform command-line program that connects to Azure and ex
 ```
 
 #### Azure Cloud Shell
+
 [Azure Cloud Shell](https://shell.azure.com/) is an interactive, authenticated, browser-accessible shell for managing Azure resources. It provides the flexibility of choosing the shell experience that best suits the way you work, either Bash or PowerShell.
 
 You can switch between the two shells, and both support the Azure CLI and Azure PowerShell module. Bash defaults to the Azure CLI (with the `az` command pre-installed), but you can switch to PowerShell Core within Linux by typing `pwsh`. The PowerShell environment has both CLI tools pre-installed. In addition to these administrative tools, the Cloud Shell has a suite of developer tools, text editors, and other tools available, including:
 
-| __Developer Tools__ |  __Editors__ | __Other tools__ |
-| ------------------- | ------------ | --------------- |
-|    .NET Core <br> Python <br> Java <br> Node.js <br>Go | code (Cloud Shell Editor) <br> vim<br> nano<br> emacs| git<br>maven<br>make<br>npm<br>and more...
+| **Developer Tools**                                 | **Editors**                                           | **Other tools**                            |
+| --------------------------------------------------- | ----------------------------------------------------- | ------------------------------------------ |
+| .NET Core <br> Python <br> Java <br> Node.js <br>Go | code (Cloud Shell Editor) <br> vim<br> nano<br> emacs | git<br>maven<br>make<br>npm<br>and more... |
 
-You can create, build, and deploy apps right from this browser-based environment. It's all persistent as well - you're prompted to create an Azure Storage Account when you access the Azure Cloud Shell. This storage area is used as your $HOME folder and any scripts or data you place here is kept across sessions. Each subscription has a unique storage account associated with it, so you can keep the data and tools you need specific to each account you manage.
+You can create, build, and deploy apps right from this browser-based environment. It's all persistent as well - you're prompted to create an Azure Storage Account when you access the Azure Cloud Shell. This storage area is used as your \$HOME folder and any scripts or data you place here is kept across sessions. Each subscription has a unique storage account associated with it, so you can keep the data and tools you need specific to each account you manage.
 
 We'll use the Cloud Shell in Microsoft Learn for many of the interactive exercises to try out Azure features.
 
@@ -67,24 +70,25 @@ We'll use the Cloud Shell in Microsoft Learn for many of the interactive exercis
 
 The [Microsoft Azure mobile app](https://azure.microsoft.com/en-us/features/azure-portal/mobile-app/) allows you to access, manage, and monitor all your Azure accounts and resources from your iOS or Android phone or tablet. Once installed, you can:
 
-* Check the current status and important metrics of your services
-* Stay informed with notifications and alerts about important health issues
-* Quickly diagnose and fix issues anytime, anywhere
-* Review the latest Azure alerts
-* Start, stop, and restart virtual machines or web apps
-* Connect to your virtual machines
-* Manage permissions with role-based access control (RBAC)
-* Use the Azure Cloud Shell to run saved scripts or perform ad hoc administrative tasks
-* and more...
+- Check the current status and important metrics of your services
+- Stay informed with notifications and alerts about important health issues
+- Quickly diagnose and fix issues anytime, anywhere
+- Review the latest Azure alerts
+- Start, stop, and restart virtual machines or web apps
+- Connect to your virtual machines
+- Manage permissions with role-based access control (RBAC)
+- Use the Azure Cloud Shell to run saved scripts or perform ad hoc administrative tasks
+- and more...
 
 #### Other options
+
 There are also Azure SDKs for a range of languages and frameworks, and REST APIs that you can use to manage and control Azure resources programmatically. For a full list of tools available, see the [Downloads](https://azure.microsoft.com/en-us/downloads/) page.
 
 When starting with Azure, you'll most often use the Azure portal. Let's take a closer look at the portal approach.
 
 ### Navigate the portal
 
-With an Azure account, we can sign into the __Azure portal__. The portal is a web-based administration site that lets you interact with all of your subscriptions and resources you have created. Almost everything you do with Azure can be done through this web interface.
+With an Azure account, we can sign into the **Azure portal**. The portal is a web-based administration site that lets you interact with all of your subscriptions and resources you have created. Almost everything you do with Azure can be done through this web interface.
 
 #### Azure portal layout
 
@@ -114,42 +118,44 @@ If you are viewing the Azure portal on a screen with reduced horizontal space, t
 
 #### Cloud Shell
 
-If you select the Cloud Shell icon (>_), you create a new Azure Cloud Shell session. Recall that Azure Cloud Shell is an interactive, browser-accessible shell for managing Azure resources. It provides the flexibility of choosing the shell experience that best suits the way you work. Linux users can opt for a Bash experience, while Windows users can opt for PowerShell. This browser-based terminal lets you control and administer all of your Azure resources in the current subscription through a command-line interface built right into the portal.
+If you select the Cloud Shell icon (>\_), you create a new Azure Cloud Shell session. Recall that Azure Cloud Shell is an interactive, browser-accessible shell for managing Azure resources. It provides the flexibility of choosing the shell experience that best suits the way you work. Linux users can opt for a Bash experience, while Windows users can opt for PowerShell. This browser-based terminal lets you control and administer all of your Azure resources in the current subscription through a command-line interface built right into the portal.
 
 #### Directory and subscription
 
-Select the __Book and Filter__ icon to show the __Directory + subscription__ pane.
+Select the **Book and Filter** icon to show the **Directory + subscription** pane.
 
-Azure allows you to have more than one subscription associated with one directory. On the __Directory + subscription__ pane, you can change between subscriptions. Here, you can change your subscription or change to another directory.
+Azure allows you to have more than one subscription associated with one directory. On the **Directory + subscription** pane, you can change between subscriptions. Here, you can change your subscription or change to another directory.
 
 #### Notifications
-Selecting the bell icon displays the __Notifications__ pane. This pane lists the last actions that have been carried out, along with their status.
+
+Selecting the bell icon displays the **Notifications** pane. This pane lists the last actions that have been carried out, along with their status.
 
 #### Settings
+
 Select the gear icon to change the Azure portal settings. These settings include:
 
-* Inactivity sign out delay
-* Default view when you first sign in
-* Flyout or docked option for the portal menu
-* Color and contrast themes
-* Toast notifications (to a mobile device)
-* Language and regional format
+- Inactivity sign out delay
+- Default view when you first sign in
+- Flyout or docked option for the portal menu
+- Color and contrast themes
+- Toast notifications (to a mobile device)
+- Language and regional format
 
 #### Help panel
 
-Select the __question mark__ icon to show the __Help__ pane. Here you choose from several options, including:
+Select the **question mark** icon to show the **Help** pane. Here you choose from several options, including:
 
-* Help + Support
-* What's new
-* Azure roadmap
-* Launch guided tour
-* Keyboard shortcuts
-* Show diagnostics
-* Privacy statement
+- Help + Support
+- What's new
+- Azure roadmap
+- Launch guided tour
+- Keyboard shortcuts
+- Show diagnostics
+- Privacy statement
 
 #### Help and support options
 
-__Help + support__ opens the main help and support area for the Azure portal and includes documentation options for a variety of common questions. One of the hidden areas here is the __New support request__ link, which is on this page. This link is how you can open a support ticket with the Azure team.
+**Help + support** opens the main help and support area for the Azure portal and includes documentation options for a variety of common questions. One of the hidden areas here is the **New support request** link, which is on this page. This link is how you can open a support ticket with the Azure team.
 
 All Azure customers can access billing, quota, and subscription-management support. _The availability of support for other issues depends on the support plan you have._
 
@@ -157,43 +163,45 @@ When you open a support ticket, you will complete the form by using provided dro
 
 Once you've filled out the form, select Create to submit your support request. The Azure support team will contact you after you submit your request.
 
-You can then check the status and details of your support request, by going to __Help > Help +support > All support requests__.
+You can then check the status and details of your support request, by going to **Help > Help +support > All support requests**.
 
 #### Feedback panel
 
-The __smiley face__ icon opens the Send us feedback pane. Here you can send feedback to Microsoft about Azure. You can decide as part of your feedback whether Microsoft can respond to your feedback by email.
+The **smiley face** icon opens the Send us feedback pane. Here you can send feedback to Microsoft about Azure. You can decide as part of your feedback whether Microsoft can respond to your feedback by email.
 
 #### Profile settings
+
 If you select on your name in the top right-hand corner, a menu opens with a few options:
 
-* Sign in with another account, or sign out entirely
-* View your account profile, where you can change your password
+- Sign in with another account, or sign out entirely
+- View your account profile, where you can change your password
 
 Select the "..." button on the right-hand side for options to:
 
-* Check your permissions
-* View your bill
-* Update your contact information
+- Check your permissions
+- View your bill
+- Update your contact information
 
-If you select "..." and then __View my bill__, Azure takes you to the __Cost Management + Billing - Invoices__ page, which helps you analyze where Azure is generating costs.
+If you select "..." and then **View my bill**, Azure takes you to the **Cost Management + Billing - Invoices** page, which helps you analyze where Azure is generating costs.
 
 Azure is a large product, and the Azure portal user interface (UI) reflects this scope. The sliding pane approach allows you to navigate back and forth through the various administrative tasks with ease. Let's experiment a bit with this UI so you get some practice.
 
 #### Azure Advisor
+
 Finally, the Azure Advisor is a free service built into Azure that provides recommendations on high availability, security, performance, operational excellence, and cost. Advisor analyzes your deployed services and looks for ways to improve your environment across those areas. You can view recommendations in the portal or download them in PDF or CSV format.
 
 With Azure Advisor, you can:
 
-* Get proactive, actionable, and personalized best practices recommendations.
-* Improve the performance, security, and high availability of your resources as you identify opportunities to reduce your overall Azure costs.
-* Get recommendations with proposed actions inline.
+- Get proactive, actionable, and personalized best practices recommendations.
+- Improve the performance, security, and high availability of your resources as you identify opportunities to reduce your overall Azure costs.
+- Get recommendations with proposed actions inline.
 
-You can access Azure Advisor by selecting __Advisor__ from the navigation menu, or search for it in the All Services menu.
+You can access Azure Advisor by selecting **Advisor** from the navigation menu, or search for it in the All Services menu.
 
-
-###  Exercise - Work with panes
+### Exercise - Work with panes
 
 #### Activate the Azure sandbox
+
 1. Start by activating the Azure sandbox above.
 
 2. Once it's activated, sign into the Azure portal for sandbox . Make sure to use the same account you activated the sandbox with.
@@ -202,11 +210,11 @@ You can access Azure Advisor by selecting __Advisor__ from the navigation menu, 
 
 Once you are logged into the Azure portal, we can start exploring things. In these sections, you get a tour of the Azure portal, but won't actually create any Azure resources.
 
-1. Let's start by touring how to create a resource. On the home page, select __Create a resource__.
+1. Let's start by touring how to create a resource. On the home page, select **Create a resource**.
 
 2. A pane labeled New appears and displays a list of categories on the left-hand side, labeled Azure Marketplace. This initial view is somewhat like a `"Popular Categories"` menu, with some of the most common categories visible. If you'd like, you can expand this list to see everything in the Marketplace pane with the See all link next to the heading. If you do, you can get back to the New pane by selecting the X icon in the upper right of any panes you have opened.
 
-3. Selecting any of items in the Azure Marketplace list will show popular services for that category on the right of the __New__ pane. This list is a subset of the entire range of computing resources available for that category. As with the Azure Marketplace, you can select on the __See all__ link for a more comprehensive list. We will talk more about this list in subsequent sections.
+3. Selecting any of items in the Azure Marketplace list will show popular services for that category on the right of the **New** pane. This list is a subset of the entire range of computing resources available for that category. As with the Azure Marketplace, you can select on the **See all** link for a more comprehensive list. We will talk more about this list in subsequent sections.
 
 4. Returning to the New pane, select on Get started and you should see a list on the right side of the pane that includes services such as Windows Server 2016 Datacenter, Ubuntu Server VM, SQL Database, and so on. Most of these items include a Quickstarts + tutorials link directly below the name. This link opens a new browser tab with the quickstart Microsoft documentation for that item.
 
@@ -218,15 +226,16 @@ Once you are logged into the Azure portal, we can start exploring things. In the
 
 2. To the right of Featured, select See all. The full list of available VM services now appears.
 
-3. Select __Windows Server__ under the Operating Systems section. On screens with limited horizontal space for the pane, you may have to scroll right and select the See More link to find the Windows Server option.
+3. Select **Windows Server** under the Operating Systems section. On screens with limited horizontal space for the pane, you may have to scroll right and select the See More link to find the Windows Server option.
 
 4. Select the drop-down list to see all of the Windows Server images available.
 
-5.Select the __X__ at the top right-hand corner to close the __Windows Server__ window.
+5.Select the **X** at the top right-hand corner to close the **Windows Server** window.
 
-6. Select the __X__ on the previous Marketplace window. You should now see the __New__ pane again.
+6. Select the **X** on the previous Marketplace window. You should now see the **New** pane again.
 
 #### Filter results
+
 Another way to locate services is to refine the list with filters and search terms. On the New pane, you may have noticed the search box at the top. Searching is the quickest way to filter what services you see.
 
 This search defaults to checking every Azure service category to get its results. Next, you'll filter after selecting a category.
@@ -251,15 +260,15 @@ The Azure portal has several features and services available; let's look at some
 
 #### All services
 
-1. On the top left-hand side of the Azure portal, __select Show portal menu.__
+1. On the top left-hand side of the Azure portal, **select Show portal menu.**
 
-2. Select __All services__. Take a couple of minutes to look through the list to see how many services Azure offers.
+2. Select **All services**. Take a couple of minutes to look through the list to see how many services Azure offers.
 
 3. You can search for services through the _Search All box_.
 
-4. Select __Virtual machines__. If you don't see it, use the search box. The Virtual Machines pane appears. You haven't created any virtual machines so there are no results.
+4. Select **Virtual machines**. If you don't see it, use the search box. The Virtual Machines pane appears. You haven't created any virtual machines so there are no results.
 
-5. Select __+ Add > Virtual machine__. The __Create a virtual machine__ pane appears.
+5. Select **+ Add > Virtual machine**. The **Create a virtual machine** pane appears.
 
 6. Select the X in the top right-hand corner to close the Create a virtual machine pane.
 
@@ -273,26 +282,26 @@ The Azure Cloud Shell allows you to use a command-line interface (CLI) to execut
 
 The Azure Cloud Shell is available in the Sandbox environment, but the Sandbox version of the shell has reduced functionality. To use all of the Azure Cloud Shell features, use your own Azure subscription.
 
-When you launch the shell, you see a Welcome window. You can choose either a __Bash__ or __PowerShell__ environment, depending on your personal preferences. You can also change the shell at any time through the language drop-down on the left side of the shell.
+When you launch the shell, you see a Welcome window. You can choose either a **Bash** or **PowerShell** environment, depending on your personal preferences. You can also change the shell at any time through the language drop-down on the left side of the shell.
 
 Finally, there are a variety of management and programming tools included in the created environment.
 
-* Azure command-line tools (Azure CLI, AzCopy, etc.)
-* Languages / Frameworks including .NET Core, Python, and Java
-* Container management support for Docker, Kubernetes, etc.
-* Code editors such as vim, emacs, code, and nano
-* Build tools (make, maven, npm, etc.)
-* Database query tools such as sqlcmd
+- Azure command-line tools (Azure CLI, AzCopy, etc.)
+- Languages / Frameworks including .NET Core, Python, and Java
+- Container management support for Docker, Kubernetes, etc.
+- Code editors such as vim, emacs, code, and nano
+- Build tools (make, maven, npm, etc.)
+- Database query tools such as sqlcmd
 
 #### Directory and subscription
 
-1. Select the __Directory + Subscription__ (book and filter) icon to show the __Directory + subscription__ pane.
+1. Select the **Directory + Subscription** (book and filter) icon to show the **Directory + subscription** pane.
 
 This is where you can switch between multiple subscriptions or directories. You should see that you are in the Concierge Subscription of the Microsoft Learn Sandbox directory here. If you have other Azure directories tied to the same email address, those subscriptions will be available as well.
 
 There is also a link to learn more about directories and subscriptions.
 
-Select the __X__ in the top right-hand corner to close the __Directory + subscription__ pane.
+Select the **X** in the top right-hand corner to close the **Directory + subscription** pane.
 
 #### Notifications pane
 
@@ -305,6 +314,7 @@ Select the __X__ in the top right-hand corner to close the __Directory + subscri
 4. Select the X in the top right-hand corner to close the Notifications pane.
 
 #### Settings
+
 1. Select the Settings (cog) icon to open the Portal settings pane, showing the General settings by default.
 
 2. Drop down the Sign me out when inactive setting, and select After one hour.
@@ -327,23 +337,25 @@ Select the __X__ in the top right-hand corner to close the __Directory + subscri
 
 3. In the Help + support pane, under Support, select New support request. To create a new support request, you would fill in the information in each of the following sections, and then select Create to lodge the issue.
 
-* Basics: the issue type
-* Problem: severity of the problem, a summary and description, and any additional information
-* Contact information: preferred contact method and the information associated with this contact method
+- Basics: the issue type
+- Problem: severity of the problem, a summary and description, and any additional information
+- Contact information: preferred contact method and the information associated with this contact method
+
 4. You can view the status of your support requests by selecting on All support requests.
 
 Support requests can only be created using an active paid subscription. Creating support requests from a free Microsoft Learn sandbox is not supported.
 
 #### What's new and other information
+
 1. Select the Help icon and select What's new.
 
 2. Review the features that have recently been released. Also note and explore the other Help menu options, such as:
 
-* Azure roadmap
-* Launch guided tour
-* Keyboard shortcuts
-* Show diagnostics
-* Privacy statement
+- Azure roadmap
+- Launch guided tour
+- Keyboard shortcuts
+- Show diagnostics
+- Privacy statement
 
 3. Select the X in the top right-hand corner to close the Help pane.
 
@@ -351,7 +363,7 @@ Support requests can only be created using an active paid subscription. Creating
 
 #### Feedback pane
 
-1.Select the __Feedback__ (smiley face) icon to open the Send us feedback pane.
+1.Select the **Feedback** (smiley face) icon to open the Send us feedback pane.
 
 2. Type your impressions of Azure in the Tell us about your experience box, select the box that says Microsoft can email you about your feedback, and select Submit Feedback.
 
@@ -361,16 +373,16 @@ Support requests can only be created using an active paid subscription. Creating
 
 1. Select on your name in the top right-hand corner of the portal. Options include:
 
-* Sign in with another account, or sign out entirely
-* View your account profile, where you can change your password
-* Submit an idea
-* Check your permissions
-* View your bill
-* Update your contact information
+- Sign in with another account, or sign out entirely
+- View your account profile, where you can change your password
+- Submit an idea
+- Check your permissions
+- View your bill
+- Update your contact information
 
 Some of these items do not appear unless you select the "..." icon.
 
-1. Select "..." then __View my bill__ to navigate to the __Cost Management + Billing - Invoices__ page, which helps you analyze where Azure is generating costs.
+1. Select "..." then **View my bill** to navigate to the **Cost Management + Billing - Invoices** page, which helps you analyze where Azure is generating costs.
 
 If you're using your own account and not sandbox, you can select a subscription from the drop-down list.
 
@@ -378,9 +390,9 @@ Select a billing period.
 
 Note the service costs and check them against what you expect for your current subscription.
 
-Select the X in the top right-hand corner to close the __Costs by service__ pane.
+Select the X in the top right-hand corner to close the **Costs by service** pane.
 
-Select the X in the top right-hand corner to close the __Cost Management + Billing - Invoices__ page.
+Select the X in the top right-hand corner to close the **Cost Management + Billing - Invoices** page.
 
 You should now be back on the home page.
 
@@ -406,15 +418,15 @@ The default dashboard is named "Dashboard". When you log into the portal for the
 
 These default web parts are:
 
-* Dashboard controls
+- Dashboard controls
 
-* All resources tile
+- All resources tile
 
-* Quickstarts + tutorials tile
+- Quickstarts + tutorials tile
 
-* Service Health tile
+- Service Health tile
 
-* Marketplace tile
+- Marketplace tile
 
 #### Creating and managing dashboards
 
@@ -422,7 +434,7 @@ At the top of the dashboard are the controls that enable you to create, upload, 
 
 #### Select dashboard
 
-To the far left of the toolbar is the __Select Dashboard__ drop-down control. Clicking this control enables you to select from dashboards that you have already defined for your account. This control makes it simple for you to define multiple dashboards for different purposes and then switch from one to another and back again, depending on what you are trying to do at the time.
+To the far left of the toolbar is the **Select Dashboard** drop-down control. Clicking this control enables you to select from dashboards that you have already defined for your account. This control makes it simple for you to define multiple dashboards for different purposes and then switch from one to another and back again, depending on what you are trying to do at the time.
 
 Dashboards that you create will initially be private; that is, only you can see them. To make a dashboard available across your enterprise, you need to share it. We'll look at that option shortly.
 
@@ -432,28 +444,26 @@ To create a new dashboard, click New dashboard. The dashboard workspace appears,
 
 #### Upload and Download
 
-The __Upload__ and __Download__ buttons enable you to download your current dashboard as a JSON file, customize it, and then distribute it and upload it or have someone else upload that file back to the Azure portal, thereby replacing their current dashboard.
+The **Upload** and **Download** buttons enable you to download your current dashboard as a JSON file, customize it, and then distribute it and upload it or have someone else upload that file back to the Azure portal, thereby replacing their current dashboard.
 
-If you click __Download__, the current dashboard downloads the JSON code as a file you can edit locally. You can then upload it back to Azure by clicking the Upload button. Downloading and uploading dashboards is discussed further below.
+If you click **Download**, the current dashboard downloads the JSON code as a file you can edit locally. You can then upload it back to Azure by clicking the Upload button. Downloading and uploading dashboards is discussed further below.
 
 #### Edit a dashboard using the portal
 
-
 Although you can edit a dashboard by downloading the JSON file, changing values in the file, and uploading the file back to Azure, you may prefer a graphical approach to designing the user interface. To use the GUI to configure your current dashboard, you can switch to editing mode in several ways:
 
-* Click the Edit (pencil icon) button.
-* Right-click on the dashboard background area and select Edit.
-* Right-click on a tile and a menu will appear with edit options.
-* Hover over a tile on the dashboard - a ... menu will appear on the top/right corner with a Customize option.
+- Click the Edit (pencil icon) button.
+- Right-click on the dashboard background area and select Edit.
+- Right-click on a tile and a menu will appear with edit options.
+- Hover over a tile on the dashboard - a ... menu will appear on the top/right corner with a Customize option.
 
 The dashboard will switch to edit mode.
-
 
 On the left-hand side appears the Tile Gallery, with several possible tiles. You can filter the Tile Gallery by category and resource type.
 
 Adding tiles is as easy as selecting the tile from the list on the left and then dragging it to the work area. You can then move each tile about, resize it, or change the data that it displays.
 
-> __Tip__ <br>
+> **Tip** <br>
 > One cool feature is that you can take elements on child panes and put them on your dashboard. Just hover over the item and look for the ... tile edit menu - this will have a "Pin to Dashboard" option which lets you quickly grab a tile from a service and put it onto the dashboard.
 
 The work area in edit mode is divided into squares. Each tile must occupy at least one square, and tiles will snap to the nearest largest set of tile dividers. Any overlapping tiles are moved out of the way. When you make a tile smaller, the surrounding tiles will move back up against it.
@@ -468,13 +478,13 @@ To create your dashboard, pull tiles from the Tile Gallery onto the workspace an
 
 #### Change tile settings
 
-Some tiles have editable settings. For example, with the clock tile, when you drag it onto the workspace, it opens the __Edit clock__ tile. You can then set the time zone, which it displays, and also set whether it displays in 12- or 24-hour format.
+Some tiles have editable settings. For example, with the clock tile, when you drag it onto the workspace, it opens the **Edit clock** tile. You can then set the time zone, which it displays, and also set whether it displays in 12- or 24-hour format.
 
 For multi-national or transcontinental companies, you can add several clocks, each in a different time zone.
 
 #### Accepting your edits
 
-When you have arranged the tiles as you want them, either click Done customizing or right-click and then click __Done customizing__.
+When you have arranged the tiles as you want them, either click Done customizing or right-click and then click **Done customizing**.
 
 #### Edit a dashboard by changing the JSON file
 
@@ -482,7 +492,7 @@ You can also edit a dashboard by changing the JSON file. This approach provides 
 
 As an example, in the JSON shown above, to change the size of the tile you would edit the colSpan and rowSpan variables, then save the file and upload it back to Azure.
 
-> __Tip__ <br>
+> **Tip** <br>
 > You can also distribute the dashboard JSON file to other users.
 
 #### Reset a dashboard
@@ -519,7 +529,6 @@ Deleting a dashboard removes it from your list of available dashboards. You are 
 
 Let's try out some of these options by creating a new dashboard.
 
-
 ### Exercise - Customize the dashboard
 
 Dashboards are a flexible tool for managing different aspects of Azure services through the Portal. They make it convenient to monitor the state of your services. Because they are shareable, they help ensure that everyone on your team sees the same data and stays aware of the state of your critical components. Let's create a new dashboard and add some tiles to it.
@@ -533,6 +542,7 @@ Dashboards are a flexible tool for managing different aspects of Azure services 
 3. In the center pane, change My Dashboard to Customer Dashboard.
 
 #### Add and configure the Clock Tile
+
 1. In the tile gallery, drag the clock onto the workspace. Place it on the top right of the available space.
 
 2. On the Edit clock pane, change the Location to Pacific Time (US & Canada).
@@ -557,9 +567,9 @@ Dashboards are a flexible tool for managing different aspects of Azure services 
 
 6. Continue to add the following tiles, rearranging them to fit:
 
-* Help + support
-* Quick Tasks
-* Marketplace
+- Help + support
+- Quick Tasks
+- Marketplace
 
 7. When you have added these tiles, select Done customizing. The Customer Dashboard dashboard should appear.
 
@@ -575,9 +585,9 @@ You now want to create a similar dashboard for some other customers.
 
 4. From the Tile Gallery, add the following tiles:
 
-* Organization Identity
-* Users and Groups
-* User Activity Summary
+- Organization Identity
+- Users and Groups
+- User Activity Summary
 
 5. Reposition the tiles as necessary, and then select Done customizing.
 
@@ -625,6 +635,7 @@ The clocks have resized to one row high, and the bottom clock has moved up one r
 3. In the Confirmation message box, select the checkbox to confirm that this dashboard will no longer be visible, and then select OK.
 
 #### Reset a dashboard
+
 1. Ensure that Customer Dashboard is selected.
 
 2. Select Edit.
@@ -633,7 +644,7 @@ The clocks have resized to one row high, and the bottom clock has moved up one r
 
 4. In the Reset dashboard to default state message box, select Yes.
 
-    The Customer Dashboard has reset to its default tiles.
+   The Customer Dashboard has reset to its default tiles.
 
 5. Select Done customizing.
 
@@ -645,29 +656,28 @@ The clocks have resized to one row high, and the bottom clock has moved up one r
 
 Congratulations! You have now created and edited dashboards, shared them, altered them as JSON files, and finally, reset them to the default state. You should now be able to see what powerful tools dashboards can be and how you can use them to create efficient interfaces for differing roles within an organization.
 
-
 ### Access public and private preview features
 
 Microsoft offers previews of Azure features for evaluation purposes. With _Azure Preview Features_, you can test beta and other pre-release features, products, services, software, and regions.
 
 Some of the common areas you will see previews for include:
 
-* New storage types
-* New Azure services, such as Machine Learning enhancements
-* New or enhanced integration with other platforms
-* New APIs for services
+- New storage types
+- New Azure services, such as Machine Learning enhancements
+- New or enhanced integration with other platforms
+- New APIs for services
 
 Azure feature previews are available under certain terms and conditions that are specific to each particular Azure preview. Also, some previews are not covered by customer support.
 
-Once a feature has been evaluated and tested successfully, it might be released to customers as part of Azure's default product set. This release is referred to as __General Availability (GA)__.
+Once a feature has been evaluated and tested successfully, it might be released to customers as part of Azure's default product set. This release is referred to as **General Availability (GA)**.
 
 #### Feature preview categories
 
 There are two types of previews available:
 
-* __Private Preview__. An Azure feature marked "private preview" is available to specific Azure customers for evaluation purposes. This is typically by invite only and issued directly by the product team responsible for the feature or service.
+- **Private Preview**. An Azure feature marked "private preview" is available to specific Azure customers for evaluation purposes. This is typically by invite only and issued directly by the product team responsible for the feature or service.
 
-* __Public Preview__. An Azure feature marked "public preview" is available to all Azure customers for evaluation purposes. These previews can be turned on through the preview features page as detailed below.
+- **Public Preview**. An Azure feature marked "public preview" is available to all Azure customers for evaluation purposes. These previews can be turned on through the preview features page as detailed below.
 
 #### Finding preview features
 
@@ -682,7 +692,7 @@ You can also find Azure preview features in the portal as follows:
 
 #### Azure portal preview features
 
-Another preview area you can try is the next version of the Azure portal. Use the URL https://preview.portal.azure.com  (notice the preview prefix).
+Another preview area you can try is the next version of the Azure portal. Use the URL https://preview.portal.azure.com (notice the preview prefix).
 
 Typical portal preview features provide performance, navigation, and accessibility improvements to the Azure portal interface. It will be branded with Microsoft Azure (Preview) in the top bar, so you will know you are in the preview portal.
 
@@ -696,10 +706,10 @@ The Azure portal "What's New" link on the help menu (?) provides a list of recen
 
 Alternatively, you can use the Azure Updates page. This page provides additional information and features including:
 
-* Which updates are in general availability, preview, or development.
-* Browse updates by product category or update type, by using the provided dropdown lists.
-* Search for updates by keyword by entering search terms into a text-entry field.
-* Subscribe to get Azure update notifications by RSS.
+- Which updates are in general availability, preview, or development.
+- Browse updates by product category or update type, by using the provided dropdown lists.
+- Search for updates by keyword by entering search terms into a text-entry field.
+- Subscribe to get Azure update notifications by RSS.
 
 ### Summary
 

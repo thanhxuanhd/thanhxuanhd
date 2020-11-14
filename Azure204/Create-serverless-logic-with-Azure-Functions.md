@@ -1,18 +1,19 @@
 # Introduction
+
 Imagine you work for an escalator company that has invested in IoT technology to monitor its product in the field. You oversee the processing of temperature sensor data from the drive gears of the escalators. You monitor the temperature data and add a data flag to indicate when the gears are too hot. In downstream systems, this data helps determine when maintenance is required.
 
 Your company receives sensor data from several locations and from different escalator models. The data arrives in different formats, including batch file uploads, scheduled database pulls, messages on a queue, and incoming data from an event hub. You want to develop a reusable service that can process your temperature data from all these sources.
 
-When designing a service such as this with traditional enterprise architecture strategies, you would need to consider server infrastructure and maintenance up front: scope out necessary hardware, plan to install it, coordinate with IT to manage it, etc. An alternative to all that work is __serverless computing__. With serverless computing, your cloud provider manages the provisioning and maintenance of the infrastructure letting you focus completely on building the app logic. Azure Functions is a key component of the serverless computing offering from Azure and enables you to run pieces of code or _functions_, written in the programming language of your choice, in the cloud.
+When designing a service such as this with traditional enterprise architecture strategies, you would need to consider server infrastructure and maintenance up front: scope out necessary hardware, plan to install it, coordinate with IT to manage it, etc. An alternative to all that work is **serverless computing**. With serverless computing, your cloud provider manages the provisioning and maintenance of the infrastructure letting you focus completely on building the app logic. Azure Functions is a key component of the serverless computing offering from Azure and enables you to run pieces of code or _functions_, written in the programming language of your choice, in the cloud.
 
 ## Learning objectives
 
 In this module, you will:
 
-* Decide if serverless computing is right for your business need.
-* Create an Azure function app in the Azure portal.
-* Execute a function using triggers.
-* Monitor and test your Azure function from the Azure portal.
+- Decide if serverless computing is right for your business need.
+- Create an Azure function app in the Azure portal.
+- Execute a function using triggers.
+- Monitor and test your Azure function from the Azure portal.
 
 # Decide if serverless computing is right for your business needs
 
@@ -51,7 +52,8 @@ Functions are a key component of serverless computing, but they are also a gener
 Serverless compute will not always be the appropriate solution to hosting your business logic. Here are a few characteristics of functions that may affect your decision to host your services in serverless compute.
 
 ## Execution time
-By default, functions have a timeout of 5 minutes. This timeout is configurable to a maximum of 10 minutes. If your function requires more than 10 minutes to execute, you can host it on a VM. Additionally, if your service is initiated through an HTTP request and you expect that value as an HTTP response, the timeout is further restricted to 2.5 minutes. Finally, there's also an option called __Durable Functions__ that allows you to orchestrate the executions of multiple functions without any timeout.
+
+By default, functions have a timeout of 5 minutes. This timeout is configurable to a maximum of 10 minutes. If your function requires more than 10 minutes to execute, you can host it on a VM. Additionally, if your service is initiated through an HTTP request and you expect that value as an HTTP response, the timeout is further restricted to 2.5 minutes. Finally, there's also an option called **Durable Functions** that allows you to orchestrate the executions of multiple functions without any timeout.
 
 ## Execution frequency
 
@@ -59,17 +61,17 @@ The second characteristic is execution frequency. If you expect your function to
 
 While scaling, only one function app instance can be created every 10 seconds, for up to 200 total instances. Keep in mind, each instance can service multiple concurrent executions, so there is no set limit on how much traffic a single instance can handle. Different types of triggers have different scaling requirements, so research your choice of trigger and investigate its limits.
 
-#  Exercise - Create a function app in the Azure portal
+# Exercise - Create a function app in the Azure portal
 
 You are now ready to start implementing the temperature service. In the previous unit, you determined that a serverless solution would best fit your needs. Let's start by creating a function app to hold our Azure Function.
 
 ## What is a function app?
 
-Functions are hosted in an execution context called __a function app__. You define function apps to logically group and structure your functions and a compute resource in Azure. In our elevator example, you would create a function app to host the escalator drive gear temperature service. There are a few decisions that need to be made to create the function app; you need to choose a service plan and select a compatible storage account.
+Functions are hosted in an execution context called **a function app**. You define function apps to logically group and structure your functions and a compute resource in Azure. In our elevator example, you would create a function app to host the escalator drive gear temperature service. There are a few decisions that need to be made to create the function app; you need to choose a service plan and select a compatible storage account.
 
 ## Choosing a service plan
 
-Function apps may use one of two types of service plans. The first service plan is the __Consumption service plan__. This is the plan that you choose when using the Azure serverless application platform. The Consumption service plan provides automatic scaling and bills you when your functions are running. The Consumption plan comes with a configurable timeout period for the execution of a function. By default, it is 5 minutes, but may be configured to have a timeout as long as 10 minutes.
+Function apps may use one of two types of service plans. The first service plan is the **Consumption service plan**. This is the plan that you choose when using the Azure serverless application platform. The Consumption service plan provides automatic scaling and bills you when your functions are running. The Consumption plan comes with a configurable timeout period for the execution of a function. By default, it is 5 minutes, but may be configured to have a timeout as long as 10 minutes.
 
 The second plan is called the Azure App Service plan. This plan allows you to avoid timeout periods by having your function run continuously on a VM that you define. When using an App Service plan, you are responsible for managing the app resources the function runs on, so this is technically not a serverless plan. However, it may be a better choice if your functions are used continuously or if your functions require more processing power or execution time than the Consumption plan can provide.
 
@@ -81,7 +83,7 @@ When you create a function app, it must be linked to a storage account. You can 
 
 Let's create a function app in the Azure portal.
 
-1. Sign into the Azure portal  using the same account you activated the sandbox with.
+1. Sign into the Azure portal using the same account you activated the sandbox with.
 
 2. From the portal menu, select Create a resource.
 
@@ -92,7 +94,7 @@ Let's create a function app in the Azure portal.
 
 4. Choose a globally unique app name. This will serve as the base URL of your service. For example, you can name it escalator-functions-xxxxxxx, where the x's can be replaced with your initials and your birth year. If this isn't globally unique, you can try any other combination. Valid characters are a-z, 0-9 and -.
 
-5. Select the Azure sandbox subscription __Concierge Subscription__.
+5. Select the Azure sandbox subscription **Concierge Subscription**.
 
 6. Select the existing resource group called "learn-6cbe788c-f7ba-403d-8178-5c5a8f574ac1".
 
@@ -128,16 +130,16 @@ The type of event that starts the function is called a trigger. You must configu
 
 Azure supports triggers for the following services.
 
-| Service | Trigger description |
-| ------- | ------------------- |
-| Blob storage | Start a function when a new or updated blob is detected. |
-| Azure Cosmos DB |	Start a function when inserts and updates are detected. |
-| Event Grid | Start a function when an event is received from Event Grid. |
-| HTTP | Start a function with an HTTP request. |
+| Service                | Trigger description                                                                                                                                         |
+| ---------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Blob storage           | Start a function when a new or updated blob is detected.                                                                                                    |
+| Azure Cosmos DB        | Start a function when inserts and updates are detected.                                                                                                     |
+| Event Grid             | Start a function when an event is received from Event Grid.                                                                                                 |
+| HTTP                   | Start a function with an HTTP request.                                                                                                                      |
 | Microsoft Graph Events | Start a function in response to an incoming webhook from the Microsoft Graph. Each instance of this trigger can react to one Microsoft Graph resource type. |
-| Queue storage	| Start a function when a new item is received on a queue. The queue message is provided as input to the function. |
-| Service Bus |	Start a function in response to messages from a Service Bus queue. |
-| Timer	| Start a function on a schedule.|
+| Queue storage          | Start a function when a new item is received on a queue. The queue message is provided as input to the function.                                            |
+| Service Bus            | Start a function in response to messages from a Service Bus queue.                                                                                          |
+| Timer                  | Start a function on a schedule.                                                                                                                             |
 
 ## Bindings
 
@@ -215,6 +217,7 @@ The portal also provides a convenient way to test your functions. On the right s
 The ability to monitor your functions is critical during development and in production. The Azure portal provides a monitoring dashboard available if you turn on the Application Insights integration. In the function app navigation menu, once you expand the function node you'll see a Monitor menu item. This monitor dashboard provides a quick way to view the history of function executions and displays the timestamp, result code, duration, and operation ID populated by Application Insights.
 
 ## Streaming log window
+
 You're also able to add logging statements to your function for debugging in the Azure portal. The called methods for each language are passed a "logging" object, which may be used to log information to the log window located in a tabbed flyout menu located at the bottom of the code window.
 
 The following JavaScript code snippet shows how to log a message using the `context.log` method (the context object is passed to the handler).
@@ -236,6 +239,7 @@ Write-Host "Enter your logging statement here"
 ```
 
 ## Errors and warnings window
+
 You can locate the errors and warnings window tab in the same flyout menu as the log window. This window will show compilation errors and warnings within your code.
 
 # Exercise - Add logic to the function app
@@ -246,9 +250,9 @@ Let's continue with our gear drive example and add the logic for the temperature
 
 First, we need to define some requirements for our logic:
 
-* Temperatures between 0-25 should be flagged as OK.
-* Temperatures between 26-50 should be flagged as CAUTION.
-* Temperatures above 50 should be flagged as DANGER.
+- Temperatures between 0-25 should be flagged as OK.
+- Temperatures between 26-50 should be flagged as CAUTION.
+- Temperatures above 50 should be flagged as DANGER.
 
 ## Add a function to our function app
 
@@ -323,8 +327,7 @@ This configuration declares that the function runs when it receives an HTTP requ
 ## Test the function
 
 > cURL is a command line tool that can be used to send or receive files. It's included with Linux, macOS, and Windows 10, and can be downloaded for most other operating systems. cURL supports numerous protocols like HTTP, HTTPS, FTP, FTPS, SFTP, LDAP, TELNET, SMTP, POP3, etc. For more information, refer to the links below:
->https://en.wikipedia.org/wiki/CURL <br>
-> https://curl.haxx.se/docs/
+> https://en.wikipedia.org/wiki/CURL <br> > https://curl.haxx.se/docs/
 
 To test the function, you can send an HTTP request to the function URL using cURL on the command line. To find the endpoint URL of the function, return to your function code and select the Get function URL link, as shown in the following screenshot. Save this link temporarily.
 
@@ -340,10 +343,10 @@ The function and master keys are found in the Manage section when the function i
 
 2. Next, from the command line where you installed the cURL tool, format a cURL command with the URL for your function, and the Function key.
 
-* Use a POST request.
-* Add a Content-Type header value of type application/json.
-* Make sure to replace the URL below with your own.
-* Pass the Function Key as the header value x-functions-key.
+- Use a POST request.
+- Add a Content-Type header value of type application/json.
+- Make sure to replace the URL below with your own.
+- Pass the Function Key as the header value x-functions-key.
 
 ```Bash
 curl --header "Content-Type: application/json" --header "x-functions-key: <your-function-key>" --request POST --data "{\"name\": \"Azure Function\"}" https://<your-url-here>/api/DriveGearTemperatureService
@@ -355,7 +358,7 @@ curl --header "Content-Type: application/json" --header "x-functions-key: <your-
 > Note <nr>
 > You can also test from an individual function's section with the Test tab on the side of a selected function, though you won't be able to verify the function key system is working, as it is not required here. Add the appropriate header and parameter values in the Test interface and click the Run button to see the test output.
 
-## Add business logic to the function 
+## Add business logic to the function
 
 Next, let's add the logic to the function that checks temperature readings that it receives and sets a status for each.
 
@@ -431,6 +434,7 @@ In this case, we're going to use the Test pane in the portal to test our functio
 1. Open the Test window from the right-hand side flyout menu.
 
 2. Paste the sample request into the request body text box.
+
 ```JSON
 {
     "readings": [

@@ -11,13 +11,15 @@ It's June and the university would like to have the rental system in place befor
 In this module, we’ll describe the Azure technologies that are available to you and teach you how to evaluate each one for your business needs.
 
 ## Learning objectives
+
 Upon completion of this module, you'll be able to:
 
-* Evaluate Azure services for integration and process automation scenarios
+- Evaluate Azure services for integration and process automation scenarios
 
 ## Prerequisites
-* Familiarity with Azure
-* Basic knowledge of REST and APIs
+
+- Familiarity with Azure
+- Basic knowledge of REST and APIs
 
 # Identify the technology options
 
@@ -26,23 +28,24 @@ You don't have much time to get business processes properly integrated between y
 In this unit, we'll explore the Azure technology options that are available to automate and integrate your business processes.
 
 ## Common Business Problems
+
 In business, one way to guarantee a high-quality service to users and high-quality products is to design and implement strict business processes. Such processes may involve multiple steps, multiple people, and multiple software packages. Each process may run in a simple line of activities that workers perform one after the other or they may branch or loop. Each process may also run quickly or take days or weeks to complete.
 
 Frequently, a business runs into issues when it merges with a second business or integrates with a partner organization. How can administrators integrate the separate processes used in the two organizations, which may have been implemented using different software?
 
-Business processes modeled in software are often called __workflows__. Azure includes four different technologies that you can use to build and implement workflows that integrate multiple systems:
+Business processes modeled in software are often called **workflows**. Azure includes four different technologies that you can use to build and implement workflows that integrate multiple systems:
 
-* Logic Apps
-* Microsoft Power Automate
-* WebJobs
-* Azure Functions
+- Logic Apps
+- Microsoft Power Automate
+- WebJobs
+- Azure Functions
 
 These four technologies have some similarities. For example:
 
-* They can all accept __inputs__. An input is a piece of data or a file that is supplied to the workflow.
-* They can all run __actions__. An action is a simple operation that the workflow executes and may often modify data or cause another action to be performed.
-* They can all include __conditions__. A condition is a test, often run against an input, that may decide which action to execute next.
-* They can all produce __outputs__. An output is a piece of data or a file that is created by the workflow.* 
+- They can all accept **inputs**. An input is a piece of data or a file that is supplied to the workflow.
+- They can all run **actions**. An action is a simple operation that the workflow executes and may often modify data or cause another action to be performed.
+- They can all include **conditions**. A condition is a test, often run against an input, that may decide which action to execute next.
+- They can all produce **outputs**. An output is a piece of data or a file that is created by the workflow.\*
 
 In addition, workflows created with these technologies can either start based on a schedule or they can be triggered by some external event.
 
@@ -64,10 +67,10 @@ Microsoft Power Automate is a service that you can use to create workflows even 
 
 There are four different types of flow that you can create:
 
-* __Automated__: A flow that is started by a trigger from some event. For example, the event could be the arrival of a new tweet or a new file being uploaded.
-* __Button__: Use a button flow to run a repetitive task with a single click from your mobile device.
-* __Scheduled__: A flow that executes on a regular basis such as once a week, on a specific date, or after 10 hours.
-* __Business process__: A flow that models a business process such as the stock ordering process or the complaints procedure.
+- **Automated**: A flow that is started by a trigger from some event. For example, the event could be the arrival of a new tweet or a new file being uploaded.
+- **Button**: Use a button flow to run a repetitive task with a single click from your mobile device.
+- **Scheduled**: A flow that executes on a regular basis such as once a week, on a specific date, or after 10 hours.
+- **Business process**: A flow that models a business process such as the stock ordering process or the complaints procedure.
 
 Microsoft Power Automate provides an easy-to-use design surface that anyone can use to create flows of the above types. As the following screenshot illustrates, the designer makes it easy to design and layout your process.
 
@@ -77,12 +80,12 @@ Design-first technologies compared
 
 As you can see from the following table, Microsoft Power Automate is more appropriate for use by non-technical staff. If your workflow designers are IT professionals, developers, or DevOps practitioners, Logic Apps are usually a better fit:
 
-|                   | Microsoft Power Automate | Logic Apps |
-| ----------------  | ------------------------ | ---------- |
-| Intended users    |	Office workers and business analysts | Developers and IT pros |
-| Intended scenarios |	Self-service workflow creation | Advanced integration projects|
-| Design tools	    | GUI only. Browser and mobile app	| Browser and Visual Studio designer. Code editing is possible |
-| Application Lifecycle Management | Power Automate includes testing and production environments |	Logic Apps source code can be included in Azure DevOps and source code management systems |
+|                                  | Microsoft Power Automate                                    | Logic Apps                                                                                |
+| -------------------------------- | ----------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
+| Intended users                   | Office workers and business analysts                        | Developers and IT pros                                                                    |
+| Intended scenarios               | Self-service workflow creation                              | Advanced integration projects                                                             |
+| Design tools                     | GUI only. Browser and mobile app                            | Browser and Visual Studio designer. Code editing is possible                              |
+| Application Lifecycle Management | Power Automate includes testing and production environments | Logic Apps source code can be included in Azure DevOps and source code management systems |
 
 ## Code-first technologies
 
@@ -94,8 +97,8 @@ The Azure App Service is a cloud-based hosting service for web applications, mob
 
 WebJobs are a part of the Azure App Service that you can use to run a program or script automatically. There are two kinds of WebJob:
 
-* __Continuous__. These WebJobs run in a continuous loop. For example, you could use a continuous WebJob to check a shared folder for a new photo.
-* __Triggered__. These WebJobs run when you manually start them or on a schedule.
+- **Continuous**. These WebJobs run in a continuous loop. For example, you could use a continuous WebJob to check a shared folder for a new photo.
+- **Triggered**. These WebJobs run when you manually start them or on a schedule.
 
 To determine what actions your WebJobs takes, you can write code in several different languages. For example, you can script the WebJob by writing code in a Shell Script (Windows, PowerShell, Bash). Alternatively, you can write a program in PHP, Python, Node.js, or Java.
 
@@ -111,10 +114,10 @@ When you create an Azure Function, you can start by writing the code for it in t
 
 To create an Azure Function, choose from the range of templates. The following list is an example of some of the templates available to you.
 
-* __HTTPTrigger__. Use this template when you want the code to execute in response to a request sent through the HTTP protocol.
-* __TimerTrigger__. Use this template when you want the code to execute according to a schedule.
-* __BlobTrigger__. Use this template when you want the code to execute when a new blob is added to an Azure Storage account.
-* __CosmosDBTrigger__. Use this template when you want the code to execute in response to new or updated documents in a NoSQL database.
+- **HTTPTrigger**. Use this template when you want the code to execute in response to a request sent through the HTTP protocol.
+- **TimerTrigger**. Use this template when you want the code to execute according to a schedule.
+- **BlobTrigger**. Use this template when you want the code to execute when a new blob is added to an Azure Storage account.
+- **CosmosDBTrigger**. Use this template when you want the code to execute in response to new or updated documents in a NoSQL database.
 
 Azure Functions can integrate with many different services both within Azure and from third parties. These services can trigger your function, or send data input to your function, or receive data output from your function
 
@@ -125,18 +128,18 @@ In most cases, the simple administration and more flexible coding model provided
 You want the code to be a part of an existing App Service application and to be managed as part of that application, for example in the same Azure DevOps environment.
 You need close control over the object that listens for events that trigger the code. This object in question is the `JobHost` class, and you have more flexibility to modify its behavior in WebJobs.
 
-|                  | Azure WebJobs | Azure Functions |
-| ---------------  | ------------- | --------------- |
-| Supported languages |	C# if you are using the WebJobs SDK | C#, Java, JavaScript, PowerShell, etc. |
-| Automatic scaling | No | Yes|
-| Development and testing in a browser | No | Yes |
-| Pay-per-use pricing | No | Yes |
-| Integration with Logic Apps |	No | Yes |
-| Package managers	| NuGet if you are using the WebJobs SDK | Nuget and NPM |
-| Can be part of an App Service application | Yes |	No |
-| Provides close control of JobHost | Yes |	No |
-Now that you know what design-first and code-first technologies are available to you, how do you narrow your choices? We'll look at this question in the next unit.
+|                                           | Azure WebJobs                          | Azure Functions                        |
+| ----------------------------------------- | -------------------------------------- | -------------------------------------- |
+| Supported languages                       | C# if you are using the WebJobs SDK    | C#, Java, JavaScript, PowerShell, etc. |
+| Automatic scaling                         | No                                     | Yes                                    |
+| Development and testing in a browser      | No                                     | Yes                                    |
+| Pay-per-use pricing                       | No                                     | Yes                                    |
+| Integration with Logic Apps               | No                                     | Yes                                    |
+| Package managers                          | NuGet if you are using the WebJobs SDK | Nuget and NPM                          |
+| Can be part of an App Service application | Yes                                    | No                                     |
+| Provides close control of JobHost         | Yes                                    | No                                     |
 
+Now that you know what design-first and code-first technologies are available to you, how do you narrow your choices? We'll look at this question in the next unit.
 
 # Analyze the decision criteria
 
@@ -150,13 +153,13 @@ The following diagram shows a simplified flow chart that you can use to choose t
 
 The first question to ask is whether you prefer to design the workflow in a GUI designer tool or by writing code. The following list has some valid reasons for using a design-first tool:
 
-* People who design the workflow have no coding experience.
-* Later designers and users can consult the graphical design to clearly understand how the workflow proceeds.
+- People who design the workflow have no coding experience.
+- Later designers and users can consult the graphical design to clearly understand how the workflow proceeds.
 
 Alternatively, you can choose to use a code-first tool because:
 
-* People who design the workflow are developers and prefer to work entirely in code.
-* You want the details of a workflow to be hidden from non-coders.
+- People who design the workflow are developers and prefer to work entirely in code.
+- You want the details of a workflow to be hidden from non-coders.
 
 ## Choosing a design-first technology
 
@@ -174,9 +177,9 @@ If you choose to use a code-first approach, your next choice is between WebJobs 
 
 Because of the extra features that are included with Azure Functions, including wider ranges of trigger events and supported languages, the ability to develop test code in the browser, and the pay-per-use price model, consider Azure Functions to be your default choice. There are two situations in which WebJobs might be a better choice:
 
-* You have an existing Azure App Service application, and you want to model the workflow within the application. This requirement means that the workflow can also be managed as part of the application, for example in an Azure DevOps environment.
+- You have an existing Azure App Service application, and you want to model the workflow within the application. This requirement means that the workflow can also be managed as part of the application, for example in an Azure DevOps environment.
 
-* You have specific customizations that you want to make to the JobHost that are not supported by Azure Functions. For example, in a WebJob, you can create a custom retry policy for calls to external systems. This kind of policy can't be configured in an Azure Function.
+- You have specific customizations that you want to make to the JobHost that are not supported by Azure Functions. For example, in a WebJob, you can create a custom retry policy for calls to external systems. This kind of policy can't be configured in an Azure Function.
 
 ## Mixing Technologies
 
@@ -205,6 +208,7 @@ This system has proved helpful when a customer asks for a bike with specific fra
 Your managing director wants to be able to understand clearly the workflow that you develop. There were problems in the past when documentation has not been kept in-sync with custom code and your director wants to see the process as it's implemented.
 
 ## Business Process
+
 You want to update the bike reservation and rental process on both campuses to the following workflow:
 
 The details are as follows:
@@ -215,23 +219,25 @@ The details are as follows:
 4. Where are all the bikes with that frame size and those features? This information is obtained from the bike location database and is kept up-to-date by the barcode scanning system.
 5. Is there a bike with the right features and frame size in the right shop? If yes book that bike.
 
-    a. If not, where is the nearest bike? Reserve that bike.
+   a. If not, where is the nearest bike? Reserve that bike.
 
-    b. Send an email to staff to move the bike to the customer.
+   b. Send an email to staff to move the bike to the customer.
 
-    c. Scan barcode in new location.
+   c. Scan barcode in new location.
+
 6. Give the bike to the customer and update location to "On Hire".
 7. Take payment from the customer.
 
 This is a simplification of the entire process. For simplicity, we've omitted edge cases such as no bike with the desired frame size or features is available for rent. Perhaps you can think of other cases not covered by this simplified process.
 
 ## Choosing a technology
+
 Let's look at the Azure technologies available to implement the business process and integrate with the bike location database:
 
-* Microsoft Power Automate
-* Azure Logic Apps
-* Azure Functions
-* Azure Service Apps WebJobs
+- Microsoft Power Automate
+- Azure Logic Apps
+- Azure Functions
+- Azure Service Apps WebJobs
 
 You could use any of these technologies and others to build a workflow for this business process. Each technology can also integrate with any REST API, so you could also use any of these technologies to integrate with the bike location system. How then, can you choose?
 
@@ -247,8 +253,8 @@ For this reason, choose a design-first approach.
 
 Now you must choose from the two design-first technologies:
 
-* Microsoft Power Automate
-* Azure Logic Apps
+- Microsoft Power Automate
+- Azure Logic Apps
 
 There's no suggestion in the scenario that shop staff should be able to modify the business process. In addition, to connect to the bike location database through its REST API, you will need to create a custom connector. This is a developer task.
 
@@ -266,14 +272,14 @@ Your bike technicians currently use a spreadsheet to record the actions they too
 
 You want to build a system that governs the maintenance and repair process and allows everyone to find answers to the following questions.
 
-* What jobs have been completed on a bike?
-* What jobs remain to be completed before the bike can be rented out again?
-* Which bikes are currently available to rent?
-* Which bikes are currently unavailable to rent?
-* For each bike that is unavailable:
-    * Why can't we rent them out?
-    * Are we waiting for any parts, and what are those parts?
-    * When is the bike likely to be available again for rent?
+- What jobs have been completed on a bike?
+- What jobs remain to be completed before the bike can be rented out again?
+- Which bikes are currently available to rent?
+- Which bikes are currently unavailable to rent?
+- For each bike that is unavailable:
+  - Why can't we rent them out?
+  - Are we waiting for any parts, and what are those parts?
+  - When is the bike likely to be available again for rent?
 
 You'd like to integrate this system with the bike booking and rental process from the last unit so that, when shop staff search for available bikes, they find only those bicycles that are currently available to rent. Your manager has asked you to be the developer on this project.
 
@@ -283,45 +289,49 @@ You want to ensure that bike technicians on both campuses stick to the following
 
 The details are as follows:
 
-1. A customer returns a bike to any location. The bike maintenance process starts.
-2. A technician marks the bike as unavailable.
-3. A technician completes a full list of checks including the tires, brakes, drive chain, and lights.
-4. Are new parts required?
-    
+1.  A customer returns a bike to any location. The bike maintenance process starts.
+2.  A technician marks the bike as unavailable.
+3.  A technician completes a full list of checks including the tires, brakes, drive chain, and lights.
+4.  Are new parts required?
+
     a.New parts are required, but we don't have the parts in stock.
 
         i. The technician orders new parts
         ii. Parts arrive
+
     b. Fit new parts
-5. A technician completes final changes.
-6. A technician marks the bike as available for rent.
+
+5.  A technician completes final changes.
+6.  A technician marks the bike as available for rent.
 
 ## Choose a technology
+
 To implement the business process and integrate with the bike location database, let's consider the following set of technologies.
 
-* Microsoft Power Automate
-* Azure Logic Apps
-* Azure Functions
-* Azure Service Apps WebJobs
+- Microsoft Power Automate
+- Azure Logic Apps
+- Azure Functions
+- Azure Service Apps WebJobs
 
 As in the previous scenario, any of these technologies could be used to build the workflow. However, there are two issues that determine the optimal choice.
 
 ## Design-first or code-first?
+
 To implement this workflow using just Logic Apps or Power Automate would be difficult. While we haven't heard too many low-level details, it's clear that this process needs to access an inventory system, place orders with a third-party parts company. This is new business logic and there is no requirement that we consider a design-first approach. We can wrap our solution in a custom connector to integrate with other workflows created with Logic Apps or Power Automate. As a developer, you have most flexibility by approaching this scenario from a code-first approach, so let's do that!
 
 ## Azure Functions or Azure Apps Service WebJobs?
 
 We have to make a decision between the following two technologies.
 
-* Azure Functions
-* Azure App Service WebJobs
+- Azure Functions
+- Azure App Service WebJobs
 
 The following factors will influence your choice:
 
-* Cost: With Web Jobs, you pay for the entire VM or App Service Plan that hosts the job. Azure Function can run on a consumption plan, so you only pay when the function runs. Since this process only kicks off when a bike is returned, we might stand to save by selecting Azure Functions.
+- Cost: With Web Jobs, you pay for the entire VM or App Service Plan that hosts the job. Azure Function can run on a consumption plan, so you only pay when the function runs. Since this process only kicks off when a bike is returned, we might stand to save by selecting Azure Functions.
 
-* Integrations: You want to integrate the maintenance workflow with the Logic App that you build for the bike booking and rental process in the previous unit. Although it is possible to call a WebJob from a Logic App, the integration between Logic Apps and Functions is closer. For example, you can more easily control your call to a Function from the Logic Apps designer.
-For these reasons, we'll select Azure Function to manage your bike maintenance business process.
+- Integrations: You want to integrate the maintenance workflow with the Logic App that you build for the bike booking and rental process in the previous unit. Although it is possible to call a WebJob from a Logic App, the integration between Logic Apps and Functions is closer. For example, you can more easily control your call to a Function from the Logic Apps designer.
+  For these reasons, we'll select Azure Function to manage your bike maintenance business process.
 
 # Knowledge check
 
@@ -329,9 +339,9 @@ For these reasons, we'll select Azure Function to manage your bike maintenance b
 
 You work for a company that makes TV adverts. You want to formalize two business processes:
 
-* The advert review process. A completed advert is put through this editorial process to ensure that it meets the standards of taste, decency, grammar, style, and legal requirements in the jurisdiction where it will be broadcast.
+- The advert review process. A completed advert is put through this editorial process to ensure that it meets the standards of taste, decency, grammar, style, and legal requirements in the jurisdiction where it will be broadcast.
 
-* The feedback collection process. A completed advert is also put through this process in which customers, the director, and members of the board of directors, can give feedback.
+- The feedback collection process. A completed advert is also put through this process in which customers, the director, and members of the board of directors, can give feedback.
 
 The advert review process should be managed by members of the creative team, because it will need to change regularly. The creative team would prefer not to have to wait for a developer to become available whenever a change is needed.
 
@@ -341,9 +351,9 @@ The feedback collection process calls an on-premises SharePoint server. Because 
 
 You work for a company that makes digital cameras. The company has recently acquired a smaller company that makes lenses. You want to ensure that the same procedures are in use throughout the company for the following processes:
 
-* Lens quality control. The company you acquired has a good reputation for lens reliability because of its quality control procedure. You want to implement this procedure across the merged company and integrate it with your parts ordering system, which includes a REST API.
+- Lens quality control. The company you acquired has a good reputation for lens reliability because of its quality control procedure. You want to implement this procedure across the merged company and integrate it with your parts ordering system, which includes a REST API.
 
-* Ordering and dispatch. The company you acquired had no formal order and dispatch procedure, so you want to ensure its employees use your original business procedure. The ordering system has a user interface that is built as an Azure App service web app but you want to manage the order and dispatch workflow as a separate project.
+- Ordering and dispatch. The company you acquired had no formal order and dispatch procedure, so you want to ensure its employees use your original business procedure. The ordering system has a user interface that is built as an Azure App service web app but you want to manage the order and dispatch workflow as a separate project.
 
 You have hired a small team of developers to do the work and you prefer a design-first approach.
 
@@ -351,17 +361,17 @@ You have hired a small team of developers to do the work and you prefer a design
 
 Some business processes are simple, but often they include challenges such as:
 
-* They might involve many different steps, sometimes with loops or conditional branches.
-* They may be long-running and complete over days or weeks as staff become available or because of other delays.
-* They may involve several different systems such as databases, web services, email servers, and other components.
-* You may want to integrate a custom or third-party system, which may require a custom connector.
-* You may want non-developers to be able to modify and update the workflow.
+- They might involve many different steps, sometimes with loops or conditional branches.
+- They may be long-running and complete over days or weeks as staff become available or because of other delays.
+- They may involve several different systems such as databases, web services, email servers, and other components.
+- You may want to integrate a custom or third-party system, which may require a custom connector.
+- You may want non-developers to be able to modify and update the workflow.
 
 As you have seen, Azure includes the following technologies that you can use to overcome these challenges:
 
-* Microsoft Power Automate
-* Azure Logic Apps
-* Azure Functions
-* Azure App Service WebJobs
+- Microsoft Power Automate
+- Azure Logic Apps
+- Azure Functions
+- Azure App Service WebJobs
 
 Your choice of technology depends on whether you prefer a design-first or a code-first approach, and whether you have skilled developers to work on the project.

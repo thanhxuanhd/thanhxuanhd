@@ -1,4 +1,5 @@
 ## Introduction
+
 Imagine you've joined a company who has been moving to the cloud. This movement happened organically across different departments, and resulted in a lack of awareness of what's already been created and where everything is. There's no ability to easily determine who owns which resources. There's no enforcement of standards for things like resource names, resource sizes, and geographic locations. There's also been several instances where critical resources were inadvertently deleted, causing business-critical outages.
 
 Your manager has asked you to head up an effort to put some order into the chaos, but you're new to Azure and aren't entirely sure what you can do to make this better.
@@ -9,10 +10,10 @@ Azure Resource Manager has a number of features that you can use to organize res
 
 In this module, you will:
 
-* Use resource groups to organize Azure resources
-* Use tags to organize resources
-* Apply policies to enforce standards in your Azure environments
-* Use resource locks to protect critical Azure resources from accidental deletion
+- Use resource groups to organize Azure resources
+- Use tags to organize resources
+- Apply policies to enforce standards in your Azure environments
+- Use resource locks to protect critical Azure resources from accidental deletion
 
 ## Principles of resource groups
 
@@ -38,11 +39,11 @@ Resource groups are also a scope for applying role-based access control (RBAC) p
 
 Resource groups can be created by using the following methods:
 
-* Azure portal
-* Azure PowerShell
-* Azure CLI
-* Templates
-* Azure SDKs (like .NET, Java)
+- Azure portal
+- Azure PowerShell
+- Azure CLI
+- Templates
+- Azure SDKs (like .NET, Java)
 
 Let's walk through the steps you'd take to create a resource group in the Azure portal. If you'd like to follow along in your own subscription, you may.
 
@@ -121,6 +122,7 @@ We mentioned earlier that resource groups serve as the life cycle for the resour
 Lastly, placing resources in the same resource group is a way to group them for usage in billing reports. If you're trying to understand how your costs are distributed in your Azure environment, grouping them by resource group is one way to filter and sort the data to better understand where costs are allocated.
 
 ### Summary
+
 The bottom line is that you have flexibility in how to organize resources in your resource groups. Put some thought into it so that you have a coherent approach to how you use resource groups in your Azure environment.
 
 ## Use tagging to organize resources
@@ -131,10 +133,10 @@ You've gone through your resources and moved them into resource groups that are 
 
 Tags are name/value pairs of text data that you can apply to resources and resource groups. Tags allow you to associate custom details about your resource, in addition to the standard Azure properties a resource has the following properties:
 
-* department (like finance, marketing, and more)
-* environment (prod, test, dev)
-* cost center
-* life cycle and automation (like shutdown and startup of virtual machines)
+- department (like finance, marketing, and more)
+- environment (prod, test, dev)
+- cost center
+- life cycle and automation (like shutdown and startup of virtual machines)
 
 A resource can have up to 50 tags. The name is limited to 512 characters for all types of resources except storage accounts, which have a limit of 128 characters. The tag value is limited to 256 characters for all types of resources. Tags aren't inherited from parent resources. Not all resource types support tags, and tags can't be applied to classic resources.
 
@@ -207,7 +209,7 @@ You'd like to ensure that all resources have the Department tag associated with 
 
 ### Create the policy definition
 
-1. Navigate to the Azure portal  in a web browser if you haven't already. In the search box in the top navigation bar, search for Policy and select the Policy service.
+1. Navigate to the Azure portal in a web browser if you haven't already. In the search box in the top navigation bar, search for Policy and select the Policy service.
 
 2. Select the Definitions pane from the Authoring section in the left menu.
 
@@ -309,10 +311,10 @@ RBAC provides fine-grained access management for Azure resources, enabling you t
 
 Using RBAC, you can:
 
-* Allow one user to manage VMs in a subscription, and another user to manage virtual networks.
-* Allow a database administrator (DBA) group to manage SQL databases in a subscription.
-* Allow a user to manage all resources in a resource group, such as VMs, websites, and virtual subnets.
-* Allow an application to access all resources in a resource group.
+- Allow one user to manage VMs in a subscription, and another user to manage virtual networks.
+- Allow a database administrator (DBA) group to manage SQL databases in a subscription.
+- Allow a user to manage all resources in a resource group, such as VMs, websites, and virtual subnets.
+- Allow an application to access all resources in a resource group.
 
 To view access permissions, use the Access control (IAM) panel for the resource in the Azure portal. On this panel, you can see who can access an area and their assigned role. Using this same panel, you can also grant or remove access.
 
@@ -326,9 +328,9 @@ RBAC uses an allow model for access. When you are assigned to a role, RBAC allow
 
 Here are some best practices you should use when setting up resources.
 
-* Segregate duties within your team and grant only the amount of access to users that they need to perform their jobs. Instead of giving everybody unrestricted permissions in your Azure subscription or resources, allow only specific actions at a particular scope.
-* When planning your access control strategy, grant users the lowest privilege level that they need to do their work.
-* Use Resource Locks to ensure critical resources aren't modified or deleted (as you'll see in the next unit).
+- Segregate duties within your team and grant only the amount of access to users that they need to perform their jobs. Instead of giving everybody unrestricted permissions in your Azure subscription or resources, allow only specific actions at a particular scope.
+- When planning your access control strategy, grant users the lowest privilege level that they need to do their work.
+- Use Resource Locks to ensure critical resources aren't modified or deleted (as you'll see in the next unit).
 
 ## Use resource locks to protect resources
 
@@ -349,7 +351,7 @@ You'll take a look at how a resource lock works in action.
 
 Recall our msftlearn-core-infrastructure-rg resource group. You've now got two virtual networks and a storage account in them. You consider these resources to be critical pieces of our Azure environment and want to ensure that they aren't mistakenly deleted. Apply a resource lock to the resource group to prevent the resource group and its contained resources from being deleted.
 
-1. Navigate to the Azure portal  in a web browser if you haven't already. In the search box in the top navigation bar, search for `msftlearn-core-infrastructure-rg` and `click` on the resource group.
+1. Navigate to the Azure portal in a web browser if you haven't already. In the search box in the top navigation bar, search for `msftlearn-core-infrastructure-rg` and `click` on the resource group.
 
 2. In the Settings section in the left menu, select Locks. You should see that the resource currently has no locks. You'll add one.
 
@@ -366,6 +368,7 @@ You now have a lock applied to the resource group that will prevent deletion of 
 7. Navigate back to the msftlearn-core-infrastructure-rg resource group, and bring up the Locks pane. You'll remove our lock so you can clean up. Click the ... on the BlockDeletion lock and select Delete.
 
 ### Using resource locks in practice
+
 You've seen how resource locks can protect from accidental deletion. In order to delete the virtual network, you needed to remove the lock. This concerted action helps ensure that you really intend to delete or modify the resource in question.
 
 Use resource locks to protect those key pieces of Azure that could have a large impact if they were removed or modified. Some examples are ExpressRoute circuits, and virtual networks, critical databases, and domain controllers. Evaluate your resources, and apply locks where you'd like to have an extra layer of protection from accidental actions.

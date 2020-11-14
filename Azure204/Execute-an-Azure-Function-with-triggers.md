@@ -8,10 +8,10 @@ You need to create a service that can be easily scheduled, updated and scaled. Y
 
 In this module, you will:
 
-* Determine which trigger works best for your business needs
-* Create a timer trigger to invoke a function on a consistent schedule
-* Create an HTTP trigger to invoke a function when an HTTP request is received
-* Create a blob trigger to invoke a function when a blob is created or updated in Azure Storage
+- Determine which trigger works best for your business needs
+- Create a timer trigger to invoke a function on a consistent schedule
+- Create an HTTP trigger to invoke a function when an HTTP request is received
+- Create a blob trigger to invoke a function when a blob is created or updated in Azure Storage
 
 # Determine the best trigger for your Azure function
 
@@ -20,7 +20,6 @@ An Azure function app doesn't do work until something tells it to execute. For e
 Here, you'll examine triggers at a high level and explore the most common types of triggers.
 
 ## What is a trigger?
-
 
 A trigger is an object that defines how an Azure function is invoked. For example, if you want a function to execute every 10 minutes, you could use a timer trigger.
 
@@ -32,14 +31,14 @@ In this module, we're going to focus on the timer, HTTP, and blob trigger types.
 
 Azure Functions support a wide range of trigger types. Here are some of the most common types:
 
-| Type | Purpose |
-| ---- | ------- |
-| Timer | Execute a function at a set interval. |
-| HTTP	| Execute a function when an HTTP request is received. |
-| Blob	| Execute a function when a file is uploaded or updated in Azure Blob storage.|
-| Queue	| Execute a function when a message is added to an Azure Storage queue.|
-| Azure Cosmos DB |	Execute a function when a document changes in a collection.|
-| Event Hub | Execute a function when an event hub receives a new event.|
+| Type            | Purpose                                                                      |
+| --------------- | ---------------------------------------------------------------------------- |
+| Timer           | Execute a function at a set interval.                                        |
+| HTTP            | Execute a function when an HTTP request is received.                         |
+| Blob            | Execute a function when a file is uploaded or updated in Azure Blob storage. |
+| Queue           | Execute a function when a message is added to an Azure Storage queue.        |
+| Azure Cosmos DB | Execute a function when a document changes in a collection.                  |
+| Event Hub       | Execute a function when an event hub receives a new event.                   |
 
 ## What is a binding?
 
@@ -76,19 +75,20 @@ At first, this string may look confusing. We'll come back and break down these c
 
 To build a CRON expression, you need to have a basic understanding of some of the special characters.
 
-| Special character	 | Meaning | Example |
-| -----------------  | ------- | ------- |
-| *	                 | Selects every value in a field | An asterisk "*" in the day of the week field means every day.
-| ,	                 | Separates items in a list	| A comma "1,3" in the day of the week field means just Mondays (day 1) and Wednesdays (day 3).
-| -	                 | Specifies a range	| A hyphen "10-12" in the hour field means a range that includes the hours 10, 11, and 12.
-| /	                 | Specifies an increment |	A slash "*/10" in the minutes field means an increment of every 10 minutes.
+| Special character | Meaning                        | Example                                                                                       |
+| ----------------- | ------------------------------ | --------------------------------------------------------------------------------------------- |
+| \*                | Selects every value in a field | An asterisk "\*" in the day of the week field means every day.                                |
+| ,                 | Separates items in a list      | A comma "1,3" in the day of the week field means just Mondays (day 1) and Wednesdays (day 3). |
+| -                 | Specifies a range              | A hyphen "10-12" in the hour field means a range that includes the hours 10, 11, and 12.      |
+| /                 | Specifies an increment         | A slash "\*/10" in the minutes field means an increment of every 10 minutes.                  |
 
 Now we'll go back to the original CRON expression example. Let’s try to understand it better by breaking it down field by field.
 
 ```Log
 0 */5 * * * *
 ```
-The __first field__ represents seconds. This field supports the values 0-59. Because the field contains a zero, it selects the first possible value, which is one second.
+
+The **first field** represents seconds. This field supports the values 0-59. Because the field contains a zero, it selects the first possible value, which is one second.
 
 The second field represents minutes. The value `"*/5" contains two special characters. First, the asterisk (*)` means "select every value within the field." Because this field represents minutes, the possible values are 0-59. The second special character is the slash (/), which represents an increment. When you combine these characters together, it means for all values 0-59, select every fifth value. An easier way to say that is simply "every five minutes."
 
@@ -98,7 +98,7 @@ When you put all the fields together, the expression is read as "on the first se
 
 ## How to create a timer trigger
 
-You can create a timer trigger in the Azure portal. In your Azure function app, select `timer trigger` from the list of trigger templates. Enter the logic that you want to execute. Supply a __Timestamp parameter name and the CRON expression__.
+You can create a timer trigger in the Azure portal. In your Azure function app, select `timer trigger` from the list of trigger templates. Enter the logic that you want to execute. Supply a **Timestamp parameter name and the CRON expression**.
 
 In this module we'll focus on creating triggers in the portal but you can also create triggers programmatically using Core Tools, Visual Studio or Visual Studio Code.
 
@@ -110,7 +110,7 @@ A timer trigger invokes an Azure function app on a consistent schedule. To defin
 
 Let’s start by creating an Azure Function app in the portal.
 
-1. Sign into the Azure portal  using the same account you activated the sandbox with.
+1. Sign into the Azure portal using the same account you activated the sandbox with.
 
 2. On the Azure portal menu or from the Home page, select Create a resource.
 
@@ -162,11 +162,11 @@ Here, you'll learn how to create and invoke an Azure function using an HTTP trig
 
 An HTTP trigger is a trigger that executes a function when it receives an HTTP request. HTTP triggers have many capabilities and customizations, including:
 
-* Provide authorized access by supplying keys.
-* Restrict which HTTP verbs are supported.
-* Return data back to the caller.
-* Receive data through query string parameters or through the request body.
-* Support URL route templates to modify the function URL.
+- Provide authorized access by supplying keys.
+- Restrict which HTTP verbs are supported.
+- Return data back to the caller.
+- Receive data through query string parameters or through the request body.
+- Support URL route templates to modify the function URL.
 
 When you create an HTTP trigger, select a programming language, provide a trigger name, and select an Authorization level.
 
@@ -176,17 +176,17 @@ An HTTP trigger Authorization level is a flag that indicates if an incoming HTTP
 
 There are three Authorization levels:
 
-* Function
-* Anonymous
-* Admin
+- Function
+- Anonymous
+- Admin
 
-The Function and __Admin__ levels are "key" based. To send an HTTP request, you must supply a key for authentication. There are two types of keys: _function_ and _host_. The difference between the two keys is their scope. Function keys are specific to a function. Host keys apply to all functions inside the function app. If your Authorization level is set to __Function__, you can use either a function or a host key. If your Authorization level is set to Admin, you must supply a host key.
+The Function and **Admin** levels are "key" based. To send an HTTP request, you must supply a key for authentication. There are two types of keys: _function_ and _host_. The difference between the two keys is their scope. Function keys are specific to a function. Host keys apply to all functions inside the function app. If your Authorization level is set to **Function**, you can use either a function or a host key. If your Authorization level is set to Admin, you must supply a host key.
 
 The Anonymous level means that there's no authentication required. We use this level in our exercise.
 
 ## How to create an HTTP trigger
 
-Just like a timer trigger, you can create an HTTP trigger through the Azure portal. Inside your Azure function, you select __HTTP trigger__ from the list of predefined trigger types. Then you enter the logic that you want to execute and make any customizations like restricting the use of certain HTTP verbs.
+Just like a timer trigger, you can create an HTTP trigger through the Azure portal. Inside your Azure function, you select **HTTP trigger** from the list of predefined trigger types. Then you enter the logic that you want to execute and make any customizations like restricting the use of certain HTTP verbs.
 
 One setting that's important to understand is _Request parameter name_. This setting is a string that represents the name of the parameter that contains the information about an incoming HTTP request. By default, the name of the parameter is _req_.
 
@@ -206,7 +206,7 @@ In this unit, we're going to create an Azure function that accepts an HTTP reque
 
 Let's continue using our existing Azure Functions application and add an HTTP trigger.
 
-1. Make sure you are signed into the Azure portal  using the same account you activated the sandbox with.
+1. Make sure you are signed into the Azure portal using the same account you activated the sandbox with.
 
 2. On the Azure portal menu or from the Home page, select All resources.
 
@@ -214,7 +214,7 @@ Let's continue using our existing Azure Functions application and add an HTTP tr
 
 4. Select the Add (+) button next to Functions. This action starts the function creation process.
 
-5. In the list of all templates available to this function app, select HTTP trigger. 
+5. In the list of all templates available to this function app, select HTTP trigger.
 
 6. In the New Function dialog, choose a name for the function and select Anonymous from the Authorization level dropdown.
 
@@ -252,10 +252,10 @@ Here, you learn how to create a blob trigger and instruct it to monitor a specif
 
 Azure Storage is Microsoft's cloud storage solution that supports all types of data, including: blobs, queues, and NoSQL. The goal of Azure Storage is to provide data storage that's:
 
-* Highly available
-* Secure
-* Scalable
-* Managed
+- Highly available
+- Secure
+- Scalable
+- Managed
 
 We're not going to focus on Azure Storage too much. Instead, we use it to create blobs that will trigger our function to run.
 
@@ -265,12 +265,12 @@ Azure Blob storage is an object storage solution that's designed to store large 
 
 For example, Azure Blob storage is great at doing things like:
 
-* Storing files
-* Serving files
-* Streaming video and audio
-* Logging data
+- Storing files
+- Serving files
+- Streaming video and audio
+- Logging data
 
-There are three types of blobs: __block blobs__, __append blobs__, and __page blobs__. Block blobs are the most common type. They allow you to store text or binary data efficiently. Append blobs are like block blobs, but they're designed more for append operations like creating a log file that's being constantly updated. Finally, page blobs are made up of pages and are designed for frequent random read and write operations.
+There are three types of blobs: **block blobs**, **append blobs**, and **page blobs**. Block blobs are the most common type. They allow you to store text or binary data efficiently. Append blobs are like block blobs, but they're designed more for append operations like creating a log file that's being constantly updated. Finally, page blobs are made up of pages and are designed for frequent random read and write operations.
 
 ## What is a blob trigger?
 
@@ -278,9 +278,9 @@ A blob trigger is a trigger that executes a function when a file is uploaded or 
 
 ## How to create a blob trigger
 
-Just like the other triggers we've seen so far, we create a blob trigger in the Azure portal. Inside your Azure function, select __Blob trigger__ from the list of predefined trigger types. Then enter the logic to execute when a blob is created or updated.
+Just like the other triggers we've seen so far, we create a blob trigger in the Azure portal. Inside your Azure function, select **Blob trigger** from the list of predefined trigger types. Then enter the logic to execute when a blob is created or updated.
 
-One setting that you'll want to look at is the __Path__. The __Path__ tells the blob trigger where to monitor to see if a blob is uploaded or updated. By default, the Path value is:
+One setting that you'll want to look at is the **Path**. The **Path** tells the blob trigger where to monitor to see if a blob is uploaded or updated. By default, the Path value is:
 
 ```Log
 samples-workitems/{name}
@@ -302,7 +302,7 @@ A blob trigger invokes an Azure function when it sees activity at a specific loc
 
 Again, let's continue using our existing Azure Functions application and add a blob trigger.
 
-1. Make sure you are signed into the Azure portal  using the same account you activated the sandbox with.
+1. Make sure you are signed into the Azure portal using the same account you activated the sandbox with.
 
 2. On the Azure portal menu or from the Home page, select All resources.
 
@@ -323,7 +323,9 @@ Again, let's continue using our existing Azure Functions application and add a b
 10. Once you have returned to the New Function screen, select Create to create the function.
 
 ## Create a blob container
+
 Now that we've created a blob trigger, let's use the Storage Explorer to create a blob and trigger the function.
+
 1. Open the storage account you used (or created) in a new tab.
 
 2. In the Azure portal, search for and select Storage accounts and then filter by the name.

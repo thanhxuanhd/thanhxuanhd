@@ -8,14 +8,13 @@ Therefore, you convince your team to move the site to the cloud to help save cos
 
 As it turns out, managing networks on Azure isn't entirely different from managing on-premises networks. Let's discover why.
 
-Learning objectives: 
+Learning objectives:
 
 In this module, you will learn:
 
-* How an Azure virtual network provides secure network communication among resources such as virtual machines and other networks
-* What high availability and resiliency mean and how Azure Load Balancer can increase resiliency within a single geographic region
-* What latency is and how Traffic Manager helps reduce network latency and provides resiliency across geographic locations
-
+- How an Azure virtual network provides secure network communication among resources such as virtual machines and other networks
+- What high availability and resiliency mean and how Azure Load Balancer can increase resiliency within a single geographic region
+- What latency is and how Traffic Manager helps reduce network latency and provides resiliency across geographic locations
 
 ### Deploy your site to Azure
 
@@ -41,10 +40,10 @@ Tiers help separate concerns and are ideally designed to be reusable. Using a ti
 
 Three-tier refers to an n-tier application that has three tiers. Your e-commerce web application follows this three-tier architecture:
 
-* The web tier provides the web interface to your users through a browser.
-* The application tier runs business logic.
-* The data tier includes databases and other storage that hold product information and customer orders.
-The following illustration shows the flow of a request from the user to the data tier.
+- The web tier provides the web interface to your users through a browser.
+- The application tier runs business logic.
+- The data tier includes databases and other storage that hold product information and customer orders.
+  The following illustration shows the flow of a request from the user to the data tier.
 
 When the user clicks the button to place the order, the request is sent to the web tier, along with the user's address and payment information. The web tier passes this information to the application tier, which would validate payment information and check inventory. The application tier might then store the order in the data tier, to be picked up later for fulfillment.
 
@@ -56,11 +55,11 @@ Let's say you choose to run your e-commerce site on virtual machines. Here's wha
 
 Let's break this down.
 
-__What's an Azure region?__
+**What's an Azure region?**
 
 A _region_ is one or more Azure data centers within a specific geographic location. East US, West US, and North Europe are examples of regions. In this instance, you see that the application is running in the East US region.
 
-__What's a virtual network?__
+**What's a virtual network?**
 
 A _virtual network_ is a logically isolated network on Azure. Azure virtual networks will be familiar to you if you've set up networks on Hyper-V, VMware, or even on other public clouds. A virtual network allows Azure resources to securely communicate with each other, the internet, and on-premises networks. A virtual network is scoped to a single region; however, multiple virtual networks from different regions can be connected together using virtual network peering.
 
@@ -72,13 +71,13 @@ You can also keep your service or data tiers in your on-premises network, placin
 
 Azure manages the physical hardware for you. You configure virtual networks and gateways through software, which enables you to treat a virtual network just like your own network. You choose which networks your virtual network can reach, whether that's the public internet or other networks in the private IP address space.
 
-__What's a network security group?__
+**What's a network security group?**
 
 A _network security group_, or NSG, allows or denies inbound network traffic to your Azure resources. Think of a network security group as a cloud-level firewall for your network.
 
 For example, notice that the VM in the web tier allows inbound traffic on ports 22 (SSH) and 80 (HTTP). This VM's network security group allows inbound traffic over these ports from all sources. You can configure a network security group to accept traffic only from known sources, such as IP addresses that you trust.
 
->Note <br>
+> Note <br>
 > Port 22 enables you to connect directly to Linux systems over SSH. Here we show port 22 open for learning purposes. In practice, you might configure VPN access to your virtual network to increase security.
 
 #### Summary
@@ -111,10 +110,10 @@ Resiliency refers to a system's ability to stay operational during abnormal cond
 
 These conditions include:
 
-* Natural disasters
-* System maintenance, both planned and unplanned, including software updates and security patches.
-* Spikes in traffic to your site
-* Threats made by malicious parties, such as distributed denial of service, or DDoS, attacks
+- Natural disasters
+- System maintenance, both planned and unplanned, including software updates and security patches.
+- Spikes in traffic to your site
+- Threats made by malicious parties, such as distributed denial of service, or DDoS, attacks
 
 Imagine your marketing team wants to have a flash sale to promote a new line of vitamin supplements. You might expect a huge spike in traffic during this time. This spike could overwhelm your processing system, causing it to slow down or halt, disappointing your users. You may have experienced this disappointment for yourself. Have you ever tried to access an online sale only to find the website wasn't responding?
 
@@ -154,17 +153,18 @@ This type of routing is known as application layer (OSI layer 7) load balancing 
 
 Here are some of the benefits of using Azure Application Gateway over a simple load balancer:
 
-* __Cookie affinity__. Useful when you want to keep a user session on the same backend server.
-* __SSL termination__. Application Gateway can manage your SSL certificates and pass unencrypted traffic to the backend servers to avoid encryption/decryption overhead. It also supports full end-to-end encryption for applications that require that.
-* __Web application firewall__. Application gateway supports a sophisticated firewall (WAF) with detailed monitoring and logging to detect malicious attacks against your network infrastructure.
-* __URL rule-based routes__. Application Gateway allows you to route traffic based on URL patterns, source IP address and port to destination IP address and port. This is helpful when setting up a content delivery network.
-* __Rewrite HTTP headers.__ You can add or remove information from the inbound and outbound HTTP headers of each request to enable important security scenarios, or scrub sensitive information such as server names.
+- **Cookie affinity**. Useful when you want to keep a user session on the same backend server.
+- **SSL termination**. Application Gateway can manage your SSL certificates and pass unencrypted traffic to the backend servers to avoid encryption/decryption overhead. It also supports full end-to-end encryption for applications that require that.
+- **Web application firewall**. Application gateway supports a sophisticated firewall (WAF) with detailed monitoring and logging to detect malicious attacks against your network infrastructure.
+- **URL rule-based routes**. Application Gateway allows you to route traffic based on URL patterns, source IP address and port to destination IP address and port. This is helpful when setting up a content delivery network.
+- **Rewrite HTTP headers.** You can add or remove information from the inbound and outbound HTTP headers of each request to enable important security scenarios, or scrub sensitive information such as server names.
 
 #### What is a Content Delivery Network?
 
 A content delivery network (CDN) is a distributed network of servers that can efficiently deliver web content to users. It is a way to get content to users in their local region to minimize latency. CDN can be hosted in Azure or any other location. You can cache content at strategically placed physical nodes across the world and provide better performance to end users. Typical usage scenarios include web applications containing multimedia content, a product launch event in a particular region, or any event where you expect a high-bandwidth requirement in a region.
 
 #### What about DNS?
+
 DNS, or Domain Name System, is a way to map user-friendly names to their IP addresses. You can think of DNS as the phonebook of the internet.
 
 For example, your domain name, contoso.com, might map to the IP address of the load balancer at the web tier, 40.65.106.192.
@@ -180,7 +180,6 @@ With load balancing in place, your e-commerce site is now more highly available 
 Although you can configure your own load balancer on a VM, Azure Load Balancer reduces upkeep because there's no infrastructure or software to maintain.
 
 DNS maps user-friendly names to their IP addresses, much like how a phonebook maps names of people or businesses to phone numbers. You can bring your own DNS server, or use Azure DNS.
-
 
 ### Reduce latency with Azure Traffic Manager
 
@@ -214,7 +213,7 @@ The diagram shows your e-commerce site running in three Azure regions: East US, 
 
 #### Use Traffic Manager to route users to the closest endpoint
 
-One answer is __Azure Traffic Manager__. Traffic Manager uses the DNS server that's closest to the user to direct user traffic to a globally distributed endpoint.
+One answer is **Azure Traffic Manager**. Traffic Manager uses the DNS server that's closest to the user to direct user traffic to a globally distributed endpoint.
 
 Traffic Manager doesn't see the traffic that's passed between the client and server. Rather, it directs the client web browser to a preferred endpoint. Traffic Manager can route traffic in a few different ways, such as to the endpoint with the lowest latency.
 
@@ -227,8 +226,8 @@ Azure Load Balancer distributes traffic within the same region to make your serv
 Load Balancer and Traffic Manager both help make your services more resilient, but in slightly different ways. When Load Balancer detects an unresponsive VM, it directs traffic to other VMs in the pool. Traffic Manager monitors the health of your endpoints. When Traffic Manager finds an unresponsive endpoint, it directs traffic to the next closest endpoint that is responsive.
 
 #### Summary
-Geographic distance is one of the biggest factors that contributes to latency. With Traffic Manager in place, you can host exact copies of your service in multiple geographic regions. That way, users in the United States, Europe, and Asia will all have a good experience using your e-commerce site.
 
+Geographic distance is one of the biggest factors that contributes to latency. With Traffic Manager in place, you can host exact copies of your service in multiple geographic regions. That way, users in the United States, Europe, and Asia will all have a good experience using your e-commerce site.
 
 You learned just a few ways Azure networking can help reduce latency and make your apps and services more highly available.
 

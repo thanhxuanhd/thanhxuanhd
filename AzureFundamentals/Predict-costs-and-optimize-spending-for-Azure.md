@@ -4,9 +4,9 @@ When planning a solution in the cloud, there's always the challenge of balancing
 
 You need to be able to confidently answer several questions:
 
-* What will this solution cost this fiscal year?
-* Is there an alternate configuration you could use to save money?
-* Can you estimate how a change would impact your cost and performance without putting it into a production system?
+- What will this solution cost this fiscal year?
+- Is there an alternate configuration you could use to save money?
+- Can you estimate how a change would impact your cost and performance without putting it into a production system?
 
 In this module, we'll explore the tools you can use to answer these questions and more.
 
@@ -14,11 +14,11 @@ In this module, we'll explore the tools you can use to answer these questions an
 
 In this module, you will:
 
-* Learn the different options you have to purchase Azure services
-* Estimate costs with the Azure pricing calculator
-* Predict and optimize costs with Azure Cost Management and Azure Advisor
-* Apply best practices for saving on infrastructure costs
-* Apply best practices for saving on licensing costs
+- Learn the different options you have to purchase Azure services
+- Estimate costs with the Azure pricing calculator
+- Predict and optimize costs with Azure Cost Management and Azure Advisor
+- Apply best practices for saving on infrastructure costs
+- Apply best practices for saving on licensing costs
 
 ## Purchase Azure products and services
 
@@ -30,16 +30,16 @@ When you provision an Azure resource, Azure creates one or more meter instances 
 
 For example, a single virtual machine that you provision in Azure might have the following meters tracking its usage:
 
-* Compute Hours
-* IP Address Hours
-* Data Transfer In
-* Data Transfer Out
-* Standard Managed Disk
-* Standard Managed Disk Operations
-* Standard IO-Disk
-* Standard IO-Block Blob Read
-* Standard IO-Block Blob Write
-* Standard IO-Block Blob Delete
+- Compute Hours
+- IP Address Hours
+- Data Transfer In
+- Data Transfer Out
+- Standard Managed Disk
+- Standard Managed Disk Operations
+- Standard IO-Disk
+- Standard IO-Block Blob Read
+- Standard IO-Block Blob Write
+- Standard IO-Block Blob Delete
 
 The meters and pricing vary per product and often have different pricing tiers based on the size or capacity of the resource. Check the documentation for specific details on what each service area costs.
 
@@ -47,18 +47,19 @@ At the end of each monthly billing cycle, the usage values will be charged to yo
 
 The key takeaway is that resources are always charged _based on usage_. For example, if you de-allocate a VM then you will not be billed for compute hours, I/O reads or writes or the private IP address since the VM is not running and has no allocated compute resources. However you will incur storage costs for the disks.
 
->  Note <br>
+> Note <br>
 > De-allocating a VM is not the same as deleting a VM. De-allocation means the VM is not assigned to a CPU or network in a datacenter. However, your persistent disks remain, and the resource is present in your subscription. It's similar to turning off your physical computer.
 
-##  Factors affecting costs
+## Factors affecting costs
 
 Just like your on-premises equipment costs, there are several elements that will affect your monthly costs when using Azure services. Let's look at a few of the primary factors including resource type, services, the user's location, and the billing zone.
 
 ### Resource type
+
 Costs are resource-specific, so the usage that a meter tracks and the number of meters associated with a resource depend on the resource type.
 
 > Note <br>
->Each meter tracks a particular kind of usage. For example, a meter might track bandwidth usage (ingress or egress network traffic in bits-per-second), the number of operations, size (storage capacity in bytes), or similar items.
+> Each meter tracks a particular kind of usage. For example, a meter might track bandwidth usage (ingress or egress network traffic in bits-per-second), the number of operations, size (storage capacity in bytes), or similar items.
 
 The usage that a meter tracks correlates to a number of billable units. The rate per billable unit depends on the resource type you are using. Those units are charged to your account for each billing period.
 
@@ -75,21 +76,21 @@ Azure has datacenters all over the world. Usage costs vary between locations tha
 For example, you might want to build your Azure solution by provisioning resources in locations that offer the lowest prices. This approach, though, would require transferring data between locations if any dependent resources and their users are located in different parts of the world. If there are meters tracking the volume of data moving between the resources you provision, any potential savings you make from choosing the cheapest location could be offset by the additional cost of transferring data between those resources.
 
 ## Azure billing zones
-Bandwidth refers to data moving in and out of Azure datacenters. Most of the time inbound data transfers (data going into Azure datacenters) are free. For outbound data transfers (data going out of Azure datacenters), the data transfer pricing is based on Billing Zones.
 
+Bandwidth refers to data moving in and out of Azure datacenters. Most of the time inbound data transfers (data going into Azure datacenters) are free. For outbound data transfers (data going out of Azure datacenters), the data transfer pricing is based on Billing Zones.
 
 A Zone is a geographical grouping of Azure Regions for billing purposes. The following zones exist and include the listed countries (regions).
 
-| Zone	 | Areas | 
-| ------ | ----- |
-| Zone 1 | United States, US Government, Europe, Canada, UK, France, Switzerland |
-| Zone 2 |	East Asia, Southeast Asia, Japan, Australia, India, Korea |
-| Zone 3 |	Brazil, South Africa, UAE |
-| DE Zone 1 |	Germany |
+| Zone      | Areas                                                                 |
+| --------- | --------------------------------------------------------------------- |
+| Zone 1    | United States, US Government, Europe, Canada, UK, France, Switzerland |
+| Zone 2    | East Asia, Southeast Asia, Japan, Australia, India, Korea             |
+| Zone 3    | Brazil, South Africa, UAE                                             |
+| DE Zone 1 | Germany                                                               |
 
 In most zones, the first outbound 5 gigabytes (GB) per month are free. After that amount, you are billed a fixed price per GB.
 
->Note <br>
+> Note <br>
 > Billing zones aren't the same as an Availability Zone. In Azure, the term zone is for billing purposes only, and the full term Availability Zone refers to the failure protection that Azure provides for datacenters.
 
 ## Exercise - Estimate costs with the Azure pricing calculator
@@ -102,14 +103,14 @@ To make estimates easy for customers to create, Microsoft developed the Azure pr
 
 The options that you can configure in the pricing calculator vary between products, but basic configuration options include:
 
-| Option	| Description |
-| -------   | ----------- |
-| Region |	Lists the regions from which you can provision a product. Southeast Asia, central Canada, the western United States, and northern Europe are among the possible regions available for some resources.
-| Tier	| Sets the type of tier you wish to allocate to a selected resource, such as Free Tier, Basic Tier, etc.
-| Billing Options |	Highlights the billing options available to different types of customers and subscriptions for a chosen product.
-| Support Options	| Allows you to pick from included or paid support pricing options for a selected product.
-| Programs and Offers |	Allows you to choose from available price offerings according to your customer or subscription type.
-| Azure | Dev/Test Pricing	Lists the available development and test prices for a product. Dev/Test pricing applies only when you run resources within an Azure subscription that is based on a Dev/Test offer.
+| Option              | Description                                                                                                                                                                                           |
+| ------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Region              | Lists the regions from which you can provision a product. Southeast Asia, central Canada, the western United States, and northern Europe are among the possible regions available for some resources. |
+| Tier                | Sets the type of tier you wish to allocate to a selected resource, such as Free Tier, Basic Tier, etc.                                                                                                |
+| Billing Options     | Highlights the billing options available to different types of customers and subscriptions for a chosen product.                                                                                      |
+| Support Options     | Allows you to pick from included or paid support pricing options for a selected product.                                                                                                              |
+| Programs and Offers | Allows you to choose from available price offerings according to your customer or subscription type.                                                                                                  |
+| Azure               | Dev/Test Pricing Lists the available development and test prices for a product. Dev/Test pricing applies only when you run resources within an Azure subscription that is based on a Dev/Test offer.  |
 
 ### Try out the Azure pricing calculator
 
@@ -125,6 +126,7 @@ Let's start with the Products tab. You'll see the full listing of service catego
 After you've added the services, you'll want to price them. Scrolling down on the Pricing Calculator page will show you customizable details for that service that apply to pricing. For example, on virtual machines, you can select details such as the region, operating system, and instance size. These options all impact the pricing for the VM. You'll see a subtotal for the service. Further down the page, you'll see the full total for all services included in the estimate. Along with the total, you'll see buttons where you can export, save, and share the estimate.
 
 ### Estimate a solution
+
 From our original scenario, let's imagine that this system will run on two Azure VMs and will connect to an Azure SQL Database instance. We also want to have a layer 7 load balancer in place to ensure we have enhanced load-balancing capabilities. The following illustration shows an application gateway connected to two virtual machines that are connected to a single Azure SQL Database instance.
 
 We can use the Azure pricing calculator to figure out what the solution will cost and export our estimate to share with the team. From the Example Scenarios tab, you can add all the resources involved with a common solution to the problem you are trying to solve to estimate all the potential costs. You can also add individual products from the Products tab to create an estimate for your custom solution.
@@ -134,17 +136,17 @@ We can use the Azure pricing calculator to figure out what the solution will cos
 
 In the Products tab of the Azure pricing calculator, add the following services to the estimate by clicking on them:
 
-* Virtual Machines in the Compute category
-* Azure SQL Database in the Databases category
-* Application Gateway in the Networking category
+- Virtual Machines in the Compute category
+- Azure SQL Database in the Databases category
+- Application Gateway in the Networking category
 
 We can configure the details of each, on the Saved Estimates tab, to get a solid estimate of our costs. Use the West US region for all resources.
 
-*  Virtual Machines. This project is an ASP.NET application, so we'll need to use a Windows operating system VM. This application doesn't require a massive amount of computing power, so select the D2 v3 instance size. We'll need two virtual machines, and they will run all the time (730 hours/month). We're going to use Standard SSD storage for these VMs and will require just one disk per VM of size E10, for a total of two disks. Keep the storage transactions set to the default of 100.
+- Virtual Machines. This project is an ASP.NET application, so we'll need to use a Windows operating system VM. This application doesn't require a massive amount of computing power, so select the D2 v3 instance size. We'll need two virtual machines, and they will run all the time (730 hours/month). We're going to use Standard SSD storage for these VMs and will require just one disk per VM of size E10, for a total of two disks. Keep the storage transactions set to the default of 100.
 
-* SQL Database. For the database, we're going to provision a Single Database type using the vCore model. We want a General Purpose, Gen 5 database with 8 vCores. We'll need 32 GB of storage.
+- SQL Database. For the database, we're going to provision a Single Database type using the vCore model. We want a General Purpose, Gen 5 database with 8 vCores. We'll need 32 GB of storage.
 
-* Application Gateway. For Application Gateway, we're going to use the Web Application Firewall tier, so we have some protection for our environment. And we're going to go with just 2 instances and Medium size, as our load isn't going to be high. We expect to process 1 TB of data per month. We don't expect to process any data in the North America, Europe (Zone 1).
+- Application Gateway. For Application Gateway, we're going to use the Web Application Firewall tier, so we have some protection for our environment. And we're going to go with just 2 instances and Medium size, as our load isn't going to be high. We expect to process 1 TB of data per month. We don't expect to process any data in the North America, Europe (Zone 1).
 
 ### Share and save your estimate
 
@@ -164,19 +166,19 @@ We learned how to estimate costs before you deploy services on Azure, but what i
 
 ### What is Azure Advisor?
 
-__Azure Advisor__ is a free service built into Azure that provides recommendations on high availability, security, performance, operational excellence, and cost. Advisor analyzes your deployed services and looks for ways to improve your environment across each of these areas. We'll focus on the cost recommendations, but you'll want to take some time to review the other recommendations as well.
+**Azure Advisor** is a free service built into Azure that provides recommendations on high availability, security, performance, operational excellence, and cost. Advisor analyzes your deployed services and looks for ways to improve your environment across each of these areas. We'll focus on the cost recommendations, but you'll want to take some time to review the other recommendations as well.
 
 Advisor makes cost recommendations in the following areas:
 
-1.__Reduce costs by eliminating unprovisioned Azure ExpressRoute circuits__. This recommendation identifies ExpressRoute circuits that have been in the provider status of Not Provisioned for more than one month. Advisor recommends deleting the circuit if you aren't planning to provision the circuit with your connectivity provider.
+1.**Reduce costs by eliminating unprovisioned Azure ExpressRoute circuits**. This recommendation identifies ExpressRoute circuits that have been in the provider status of Not Provisioned for more than one month. Advisor recommends deleting the circuit if you aren't planning to provision the circuit with your connectivity provider.
 
-2. __Buy reserved instances to save money over pay-as-you-go__. Advisor will review your virtual machine usage over the last 30 days and determine if you could save money in the future by purchasing reserved instances. Advisor will show you the regions and sizes where you potentially have the most savings and will show you the estimated savings you might achieve from purchasing reserved instances.
+2. **Buy reserved instances to save money over pay-as-you-go**. Advisor will review your virtual machine usage over the last 30 days and determine if you could save money in the future by purchasing reserved instances. Advisor will show you the regions and sizes where you potentially have the most savings and will show you the estimated savings you might achieve from purchasing reserved instances.
 
-3. __Right-size or shutdown underutilized virtual machines__. This analysis monitors your virtual machine usage for 14 days and then identifies underutilized virtual machines. Virtual machines whose average CPU utilization is 5 percent or less and network usage is 7 MB or less for four or more days are considered underutilized virtual machines. The average CPU utilization threshold is adjustable up to 20 percent. By identifying these virtual machines, you can decide to resize them to a smaller instance type, reducing your costs.
+3. **Right-size or shutdown underutilized virtual machines**. This analysis monitors your virtual machine usage for 14 days and then identifies underutilized virtual machines. Virtual machines whose average CPU utilization is 5 percent or less and network usage is 7 MB or less for four or more days are considered underutilized virtual machines. The average CPU utilization threshold is adjustable up to 20 percent. By identifying these virtual machines, you can decide to resize them to a smaller instance type, reducing your costs.
 
 Let's take a look at where you can find Azure Advisor in the portal.
 
-1. Sign in to the Azure portal  using your Microsoft account.
+1. Sign in to the Azure portal using your Microsoft account.
 
 2. Expand the left-hand navigation from the top-left menu and click on All Services.
 
@@ -188,7 +190,7 @@ Clicking on the Cost box will take you to detailed recommendations where you can
 
 Clicking on any recommendation will take you to the details for that specific recommendation. Then you'll be able to take a specific action, such as resizing virtual machines to reduce spending.
 
-These recommendations are all places where you might be inefficiently spending money. They're a great place to start and continue to revisit when looking for places to reduce costs. In our example, there's an opportunity for us to save around $700 per month if we take these recommendations. This savings adds up, so be sure to review these recommendations periodically across all areas.
+These recommendations are all places where you might be inefficiently spending money. They're a great place to start and continue to revisit when looking for places to reduce costs. In our example, there's an opportunity for us to save around \$700 per month if we take these recommendations. This savings adds up, so be sure to review these recommendations periodically across all areas.
 
 ### Azure Cost Management
 
@@ -204,33 +206,33 @@ If you are starting to migrate to the cloud, a useful tool you can use to predic
 
 ### Step 1: Open the TCO calculator
 
-Start by browsing to the [Total Cost of Ownership calculator](https://azure.microsoft.com/pricing/tco/)  website.
+Start by browsing to the [Total Cost of Ownership calculator](https://azure.microsoft.com/pricing/tco/) website.
 
 ### Step 2: Define your workloads
 
 Start by entering details about your on-premises infrastructure into the TCO calculator according to four groups:
 
-| Group | Description |
-| ----- | ----------  |
-| Servers |	Enter details of your current on-premises server infrastructure. |
-| Databases |	Enter details of your on-premises database infrastructure in the Source section. In the Destination section, select the corresponding Azure service you would like to use. |
-| Storage |	Enter the details of your on-premises storage infrastructure. |
-| Networking |	Enter the amount of network bandwidth you currently consume in your on-premises environment. |
+| Group      | Description                                                                                                                                                                |
+| ---------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Servers    | Enter details of your current on-premises server infrastructure.                                                                                                           |
+| Databases  | Enter details of your on-premises database infrastructure in the Source section. In the Destination section, select the corresponding Azure service you would like to use. |
+| Storage    | Enter the details of your on-premises storage infrastructure.                                                                                                              |
+| Networking | Enter the amount of network bandwidth you currently consume in your on-premises environment.                                                                               |
 
 ### Step 3: Adjust assumptions
 
 Adjust the values of assumptions that the TCO calculator makes, which might vary between customers. To improve the accuracy of the TCO calculator, you should adjust the values so they match the costs of your current on-premises infrastructure. The assumptions you can customize include:
 
-* Virtual machine costs
-* Electricity costs
-* Storage costs
-* IT labor costs
-* Hardware costs
-* Software costs
-* Virtualization costs
-* Datacenter costs
-* Networking costs
-* Database costs
+- Virtual machine costs
+- Electricity costs
+- Storage costs
+- IT labor costs
+- Hardware costs
+- Software costs
+- Virtualization costs
+- Datacenter costs
+- Networking costs
+- Database costs
 
 ## Save on infrastructure costs
 
@@ -244,11 +246,11 @@ When you activate this benefit, you will own a separate Azure subscription under
 
 The credit amount varies based on the program level, and you should check the documentation for more details on how much credit you receive for your specific subscription level. For example:
 
-* $50 per month for Visual Studio Professional
-* $150 per month for Visual Studio Enterprise
+- \$50 per month for Visual Studio Professional
+- \$150 per month for Visual Studio Enterprise
 
 > Important <br>
->The monthly Azure credit for Visual Studio subscribers is for development and testing only and does not carry a financially-backed SLA. Azure will suspend any instance (VM or cloud service) that runs continuously for more than 120 hours or if it's determined that the instance is being used for production. This benefit is made available to Visual Studio subscribers on a best efforts basis; there is no guarantee of capacity availability.
+> The monthly Azure credit for Visual Studio subscribers is for development and testing only and does not carry a financially-backed SLA. Azure will suspend any instance (VM or cloud service) that runs continuously for more than 120 hours or if it's determined that the instance is being used for production. This benefit is made available to Visual Studio subscribers on a best efforts basis; there is no guarantee of capacity availability.
 
 ### Use spending limits
 
@@ -257,7 +259,6 @@ By default, Azure subscriptions that have associated monthly credits (which incl
 Azure provides the spending limits feature to help prevent you from exhausting the credit on your account within each billing period. When your Azure usage results in charges that use all the included monthly credit, the services that you deployed are disabled and turned off for the rest of that billing period. Once a new billing period starts, assuming there are credits available, the resources are reactivated and deployed.
 
 You are notified by email when you hit the spending limit for your subscription. In addition, the Azure portal includes notifications about your credit spend. You can adjust the spending limit as desired or turn it off completely.
-
 
 > Important <br>
 > The spending limit feature is specific to subscriptions that include a monthly Azure credit allotment. It is not available on pay-only subscriptions.
@@ -321,9 +322,9 @@ Many customers have invested in Windows Server licenses and would like to repurp
 
 To be eligible for this benefit, your Windows licenses must be covered by Software Assurance. The following guidelines will also apply:
 
-* Each two-processor license or each set of 16-core licenses is entitled to two instances of up to eight cores or one instance of up to 16 cores.
-* Standard Edition licenses can only be used either on-premises or in Azure, but not both. That means you can't use the same license for an Azure VM and a local computer.
-* Datacenter Edition benefits allow for simultaneous usage both on-premises and in Azure so that the license will cover two running Windows machines.
+- Each two-processor license or each set of 16-core licenses is entitled to two instances of up to eight cores or one instance of up to 16 cores.
+- Standard Edition licenses can only be used either on-premises or in Azure, but not both. That means you can't use the same license for an Azure VM and a local computer.
+- Datacenter Edition benefits allow for simultaneous usage both on-premises and in Azure so that the license will cover two running Windows machines.
 
 Applying the benefit is easy. It can be turned on and off at any time with existing VMs or applied at deployment time for new VMs. The Hybrid Benefit can provide substantial license savings, especially when combined with reserved instances.
 
@@ -337,17 +338,17 @@ You can use this benefit even if the Azure resource is active, but the reduced r
 
 For Azure SQL Database, the Azure Hybrid Benefit works as follows:
 
-* If you have Standard Edition per-core licenses with active Software Assurance, you can get one vCore in the General Purpose service tier for every one license core you own on-premises.
-* If you have Enterprise Edition per-core licenses with active Software Assurance, you can get one vCore in the Business Critical service tier for every one license core you own on-premises. The Azure Hybrid Benefit for SQL Server for the Business Critical service tier is available only to customers who have Enterprise Edition licenses.
-* If you have highly virtualized Enterprise Edition per-core licenses with active Software Assurance, you can get four vCores in the General Purpose service tier for every one license core you own on-premises. The vCore benefit is a unique virtualization benefit available only on Azure SQL Database.
+- If you have Standard Edition per-core licenses with active Software Assurance, you can get one vCore in the General Purpose service tier for every one license core you own on-premises.
+- If you have Enterprise Edition per-core licenses with active Software Assurance, you can get one vCore in the Business Critical service tier for every one license core you own on-premises. The Azure Hybrid Benefit for SQL Server for the Business Critical service tier is available only to customers who have Enterprise Edition licenses.
+- If you have highly virtualized Enterprise Edition per-core licenses with active Software Assurance, you can get four vCores in the General Purpose service tier for every one license core you own on-premises. The vCore benefit is a unique virtualization benefit available only on Azure SQL Database.
 
 The following illustration shows the vCore-based options available in each service tier with Azure Hybrid Benefit for SQL Server licenses.
 
 For SQL Server in Azure Virtual Machines, the Azure Hybrid Benefit works as follows:
 
-* If you have Enterprise Edition per-core licenses with active Software Assurance, you can get one core of SQL Server Enterprise Edition in Azure Virtual Machines for every one license core you own on-premises.
-* If you have Standard Edition per-core licenses with active Software Assurance, you can get one core of SQL Server Standard Edition in Azure Virtual Machines for every one license core you own on-premises.
-This license arrangement can make a dramatic impact on your Azure spending with SQL Server workloads.
+- If you have Enterprise Edition per-core licenses with active Software Assurance, you can get one core of SQL Server Enterprise Edition in Azure Virtual Machines for every one license core you own on-premises.
+- If you have Standard Edition per-core licenses with active Software Assurance, you can get one core of SQL Server Standard Edition in Azure Virtual Machines for every one license core you own on-premises.
+  This license arrangement can make a dramatic impact on your Azure spending with SQL Server workloads.
 
 ### Use Dev/Test subscription offers
 
@@ -364,6 +365,7 @@ If you are a customer on an Enterprise Agreement and already have an investment 
 > An Enterprise Agreement subscription is required to use these certified BYOL images.
 
 ### Use SQL Server Developer Edition
+
 Many people are unaware that SQL Server Developer Edition is a free product for nonproduction use. Developer Edition has all the same features that Enterprise Edition has, but for nonproduction workloads, you can save dramatically on your licensing costs.
 
 Look for SQL Server images for Developer Edition on the Azure Marketplace and use them for development or testing purposes to eliminate the additional cost for SQL Server in these cases.
@@ -371,18 +373,19 @@ Look for SQL Server images for Developer Edition on the Azure Marketplace and us
 Use constrained instance sizes for database workloads
 Many customers have high requirements for memory, storage, or I/O bandwidth. But they also often have low requirements for CPU core counts. Based on this popular request, Microsoft has made available the most popular VM sizes (DS, ES, GS, and MS) in new sizes that constrain the vCPU count to one half or one-quarter of the original VM size, while maintaining the same memory, storage, and I/O bandwidth.
 
-| VM Size	| vCPUs	| Memory	| Max disks	| Max I/O throughput	| SQL Server Enterprise licensing cost per year	| Total cost per year (compute + licensing)| 
-| ------ | --------- | ----------- | ----------- | -------- | ------- | -------- |
-| Standard_DS14v2	| 16 |	112 GB|	32 |	51,200 IOPS or 768 MB/s	|	|   |
-| Standard_DS14-4v2	| 4 |	112 GB|	32 |	51,200 IOPS or 768 MB/s |	75% lower	| 57% lower
-| Standard_GS5	| 32 |	448 GB|	64 |	80,000 IOPS or 2 GB/s |		|  |
-| Standard_GS5-8	| 8 |	448 GB|	64 |	80,000 IOPS or 2 GB/s | 75% lower |	42% lower
+| VM Size           | vCPUs | Memory | Max disks | Max I/O throughput      | SQL Server Enterprise licensing cost per year | Total cost per year (compute + licensing) |
+| ----------------- | ----- | ------ | --------- | ----------------------- | --------------------------------------------- | ----------------------------------------- |
+| Standard_DS14v2   | 16    | 112 GB | 32        | 51,200 IOPS or 768 MB/s |                                               |                                           |
+| Standard_DS14-4v2 | 4     | 112 GB | 32        | 51,200 IOPS or 768 MB/s | 75% lower                                     | 57% lower                                 |
+| Standard_GS5      | 32    | 448 GB | 64        | 80,000 IOPS or 2 GB/s   |                                               |                                           |
+| Standard_GS5-8    | 8     | 448 GB | 64        | 80,000 IOPS or 2 GB/s   | 75% lower                                     | 42% lower                                 |
 
 Because database products like SQL Server and Oracle are licensed per CPU, customers can reduce licensing cost by up to 75 percent and still maintain the high performance their database requires.
 
 ### Summary
+
 We've talked through the Azure pricing calculator and how you can use it to estimate your costs on Azure and compare pricing between different service offerings. We looked at savings options, how to export pricing estimates, and at tools that Azure has available to help you keep your cloud spend in check.
 
-* Azure Advisor provides recommendations in many areas, including cost.
-* Azure Cost Management gives you reporting and billing information, so you can gain insights into where you're spending your money.
-We then explored best practices to help you save money on both infrastructure and licensing.
+- Azure Advisor provides recommendations in many areas, including cost.
+- Azure Cost Management gives you reporting and billing information, so you can gain insights into where you're spending your money.
+  We then explored best practices to help you save money on both infrastructure and licensing.
