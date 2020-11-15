@@ -123,3 +123,478 @@ The Orchestration function will manage a rule in the workflow that starts the es
 Now that we understand what's needed for our workflow, let's write it in code in the next unit!
 
 # Exercise - Create a workflow using Durable Functions
+
+## Create a Function App
+
+1. Sign in to the Azure portal using the same account that you used to activate the sandbox.
+
+2. On the Azure portal menu or from the Home page, select Create a resource.
+
+3. Select Compute, and then select Function App.
+
+4. Configure the following function app properties on the tabs listed below.
+
+   a. On the Basics tab, specify the following options:
+
+   | Property          | Suggested value                            | Description                                                                                                                                                                                                                                     |
+   | ----------------- | ------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+   | Subscription      | Concierge subscription                     | Specifies the subscription under which this new function app is created.                                                                                                                                                                        |
+   | Resource Group    | learn-2d1f38fe-f4c4-4a22-b667-4eb48c84579e | Specifies the name of the resource group in which to create your function app. We'll create the function app in the sandbox resource group that was assigned when we activated the sandbox, namely, learn-2d1f38fe-f4c4-4a22-b667-4eb48c84579e. |
+   | Function App name | [Globally unique name]                     | Specifies the name that identifies your new function app. Valid characters are a-z, 0-9, and -.                                                                                                                                                 |
+   | Publish           | Code                                       | Specifies that the function will use code instead of a container.                                                                                                                                                                               |
+   | Runtime Stack     | Node.js                                    | Specifies that the sample code in this module is written in JavaScript.                                                                                                                                                                         |
+   | Version           | 12 LTS                                     | Specifies the version of the runtime stack.                                                                                                                                                                                                     |
+   | Region            | [Select from the list below]               | Choose the region closest to you that is also one of the allowed Sandbox regions listed below.                                                                                                                                                  |
+
+Sandbox regions
+
+The free sandbox allows you to create resources in a subset of the Azure global regions. Select a region from the following list when you create resources:
+
+- West US 2
+- South Central US
+- Central US
+- East US
+- West Europe
+- Southeast Asia
+- Japan East
+- Brazil South
+- Australia Southeast
+- Central India
+
+b. On the Hosting tab, specify the following options:
+
+| Property         | Suggested value          | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| ---------------- | ------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Storage account  | [Globally unique name]   | Specifies the name of the new storage account used by your function app (which does not need to match the globally unique name that you specified for your function). Storage account names must be between 3 and 24 characters in length and may contain numbers and lowercase letters only. This dialog automatically populates the field with a unique name that is dynamically generated. However, feel free to use a different name or even an existing account. |
+| Operating system | Windows                  | Specifies the operating system that hosts the function app.                                                                                                                                                                                                                                                                                                                                                                                                           |
+| Plan type        | Consumption (Serverless) | Specifies the hosting plan that defines how resources are allocated to your function app. In the default Consumption plan, resources are added dynamically as required by your functions. In this serverless hosting model, you only pay for the time your functions run.                                                                                                                                                                                             |
+
+c. On the Monitoring tab, specify the following option:
+
+| Property                    | Suggested value | Description                                                           |
+| --------------------------- | --------------- | --------------------------------------------------------------------- |
+| Enable Application Insights | No              | Specifies that Application Insights will be disabled for this module. |
+
+5. Click Review + create and review the options that you configured. If you're satisfied with your options, click Create to provision and deploy the function app.
+
+6. Wait for the deployment to complete before continuing. This might take a few minutes.
+
+## Install the durable-functions npm package
+
+Since we are creating JavaScript Durable Functions, we need to install the durable-functions npm package. To do so, use the following steps.
+
+1. On the Azure portal menu or from the Home page, select All resources, and then select your function app.
+
+2. Under Development Tools, click App Service Editor.
+
+3. When the App Service Editor opens in a new browser window or tab, highlight the wwwroot folder.
+
+4. Click Open Console on left menu.
+   This action starts console. You can use this console to access the web server that hosts your functions, and write the code for your functions.
+
+5. Create a new package.json file:
+
+a. Enter the following commands in the console to create the new JSON file and open it in the editor:
+
+```Bash
+touch package.json
+open package.json
+```
+
+b. Add the following code:
+
+```JSON
+{
+  "name": "example",
+  "version": "1.0.0"
+}
+```
+
+Where example should be replaced with the name of your package. For example, you could use the globally unique name that you specified for your function earlier.
+
+c. Select Ctrl+S to save the file, then Ctrl+Q to close the document.
+
+6. In the console window, enter the following command:
+
+```Bash
+npm install durable-functions
+```
+
+This command instructs the node package manager to install the durable-functions package and any dependencies that are required. This may take a few minutes to complete, and the node package manager may display some warnings, which you can ignore.
+
+7. Wait until all packages have finished installing, then switch back to your browser window with the Azure portal.
+
+8. Click Overview, then click Restart, and then click Yes when prompted to restart. Wait for the restart to complete before continuing.
+
+## Create the client function for submitting a design proposal
+
+1. On the Azure portal menu or from the Home page, select All resources, and then select your function app.
+
+2. In the Azure portal, under Functions, click Functions, and then click + Add.
+
+3. Select the Durable Functions HTTP starter template. This template creates a durable function that runs in response to an HTTP request.
+
+4. Name the function HttpStart, select Function authorization level, and then click Create Function.
+
+5. When the function is created, click Code + Test, and the code for the index.js file appears in the editor. Your file should resemble the following example:
+
+```JavaScript
+const df = require("durable-functions");
+
+module.exports = async function (context, req) {
+    const client = df.getClient(context);
+    const instanceId = await client.startNew(req.params.functionName, undefined, req.body);
+
+    context.log(`Started orchestration with ID = '${instanceId}'.`);
+
+    return client.createCheckStatusResponse(context.bindingData.req, instanceId);
+};
+```
+
+6. In the drop-down menu for the files in your function, select function.json to view the bindings associated with your new function. This information specifies any authentication requirements, together with the HTTP methods that can trigger the function. This file also specifies that the function is a client that starts the orchestration process. Your file should resemble the following example:
+
+```JSON
+{
+  "bindings": [
+    {
+      "authLevel": "function",
+      "name": "req",
+      "type": "httpTrigger",
+      "direction": "in",
+      "route": "orchestrators/{functionName}",
+      "methods": [
+        "post",
+        "get"
+      ]
+    },
+    {
+      "name": "$return",
+      "type": "http",
+      "direction": "out"
+    },
+    {
+      "name": "starter",
+      "type": "orchestrationClient",
+      "direction": "in"
+    }
+  ]
+}
+```
+
+## Create the orchestrator function
+
+1. On the Azure portal menu or from the Home page, select All resources, and then select your function app.
+
+2. In the Azure portal, under Functions, click Functions, and then click + Add.
+
+3. Select the Durable Functions orchestrator template. This template creates a durable function that orchestrates the execution of functions.
+
+4. Name the new function OrchFunction, and then select Create Function.
+
+5. When the function is created, click Code + Test, and the code for the index.js file appears in the editor. Replace the existing code with the following code:
+
+```Javascript
+const df = require("durable-functions");
+
+module.exports = df.orchestrator(function* (context) {
+    const outputs = [];
+
+    /*
+    * We will call the approval activity with a reject and an approved to simulate both
+    */
+
+    outputs.push(yield context.df.callActivity("Approval", "Approved"));
+    outputs.push(yield context.df.callActivity("Approval", "Rejected"));
+
+    return outputs;
+});
+```
+
+This code calls an Activity function named Approval, which you'll create shortly. The code in the orchestrator function invokes the Approval function twice. The first time simulates accepting the proposal, and the second time tests the proposal rejection logic.
+
+The value returned by each call is combined together, and passed back to the client function. In a production environment, your orchestration function would call a series of activity functions that make the accept/reject decision, and return the result of these activities.
+
+6. Select Save to save your new function.
+
+## Create the activity function
+
+1. On the Azure portal menu or from the Home page, select All resources, and then select your function app.
+
+2. In the Azure portal, under Functions, click Functions, and then click + Add.
+
+3. Select the Durable Functions activity template. This template creates a durable function that is run when an Activity is called by an orchestrator function.
+
+4. Name the function Approval, and then select Create Function.
+
+5. When the function is created, click Code + Test, and the code for the index.js file appears in the editor. Replace the existing code with the following code:
+
+```Javascript
+module.exports = async function (context) {
+    return `Your project design proposal has been -  ${context.bindings.name}!`;
+};
+```
+
+This function returns a message indicating the status of the proposal. The expression context.bindings.name will either be Accepted or Rejected, depending on the parameter passed to the function from the orchestrator. In a real world scenario, you would add the logic that handles the accept or reject operations in this function.
+
+6. Select Save to save your new function.
+
+## Verify that the durable functions workflow starts
+
+1. On the Azure portal menu or from the Home page, select All resources, and then select your function app.
+
+2. In the Azure portal, under Functions, click Functions, and then click your HttpStart function.
+
+3. Click Get Function URL, and copy the URL. Your URL should resemble the following example:
+
+```
+https://example.azurewebsites.net/api/orchestrators/{functionName}?code=AbCdEfGhIjKlMnOpQrStUvWxYz==
+```
+
+You'll use this URL to run your functions.
+
+4. Open a new browser window and navigate to the URL that you copied. In the URL, replace the {functionName} placeholder with OrchFunction, which should resemble the following example:
+
+```
+https://example.azurewebsites.net/api/orchestrators/OrchFunction?code=AbCdEfGhIjKlMnOpQrStUvWxYz==
+```
+
+The response message contains a set of URI endpoints that you can use to monitor and manage the execution, which should resemble the following example:
+
+```JSON
+{
+  "id": "f0e1d2c3b4a5968778695a4b3c2d1e0f",
+  "statusQueryGetUri": "https://example.azurewebsites.net/...",
+  "sendEventPostUri": "https://example.azurewebsites.net/...",
+  "terminatePostUri": "https://example.azurewebsites.net/...",
+  "rewindPostUri": "https://example.azurewebsites.net/...",
+  "purgeHistoryDeleteUri": "https://example.azurewebsites.net/..."
+}
+```
+
+5.  Copy the statusQueryGetUri value, and use your web browser to navigate to this URL. You should see a response message that resembles the following example:
+
+```JSON
+{
+  "name": "OrchFunction",
+  "instanceId": "f0e1d2c3b4a5968778695a4b3c2d1e0f",
+  "runtimeStatus": "Completed",
+  "input": null,
+  "customStatus": null,
+  "output": [
+    "Your project design proposal has been -  Approved!",
+    "Your project design proposal has been -  Rejected!"
+  ],
+  "createdTime": "2019-04-16T15:23:03Z",
+  "lastUpdatedTime": "2019-04-16T15:23:35Z"
+}
+```
+
+Recall that the orchestration function runs the activity function twice. The first time, the activity function indicates that the project proposal has been accepted. The second time, the proposal is rejected. The messages from both function calls are combined by the orchestration function and returned to the client function.
+
+# Control long-running tasks using timers
+
+When you are working with a long-running workflow, it is important to consider some additional scenarios. For example, what should happen if a task isn't completed within an acceptable period of time? How can you check the status of a task? You can address these concerns with timeouts and escalation paths.
+
+In the example scenario, you've been asked to amend your new workflow to incorporate an escalation step to take action if a project design proposal isn't approved in a timely fashion.
+
+In this unit you'll learn how to control long running tasks using durable timers, and how to add an escalation path based on the timer.
+
+## Timers in Durable Functions
+
+Durable Functions provides timers for use in the orchestrator functions, which you can use to implement delays or set up timeouts for asynchronous actions. You should use durable timers in orchestrator functions instead of the setTimeout() and setInterval() functions.
+
+You create a durable timer by calling the createTimer() method of the DurableOrchestrationContext. This method returns a task that resumes on a specified date and time.
+
+## Using timers for delay
+
+The following example illustrates how to use durable timers for delay, which sends a reminder every day for 10 days.
+
+```Javascript
+const df = require("durable-functions");
+const moment = require("moment");
+
+module.exports = df.orchestrator(function*(context) {
+    for (let i = 0; i < 10; i++) {
+        const deadline = moment.utc(context.df.currentUtcDateTime).add(i, 'd');
+        yield context.df.createTimer(deadline.toDate());
+        yield context.df.callActivity("SendReminder");
+    }
+});
+```
+
+You should always use currentUtcDateTime to obtain the current date and time, instead of Date.now or Date.UTC.
+
+## Using timers for timeout
+
+The following example illustrates how to use durable timers for a timeout, which will execute a different path if a timeout occurs. In this example, the function waits until either the GetQuote activity function completes or the deadline timer expires. If the activity function completes, the code follows the success case, otherwise it follows the timeout case.
+
+```Javascript
+const df = require("durable-functions");
+const moment = require("moment");
+
+module.exports = df.orchestrator(function*(context) {
+    const deadline = moment.utc(context.df.currentUtcDateTime).add(30, "s");
+
+    const activityTask = context.df.callActivity("GetQuote");
+    const timeoutTask = context.df.createTimer(deadline.toDate());
+
+    const winner = yield context.df.Task.any([activityTask, timeoutTask]);
+    if (winner === activityTask) {
+        // success case
+        timeoutTask.cancel();
+        return true;
+    }
+    else
+    {
+        // timeout case
+        return false;
+    }
+});
+```
+
+In the following exercise, you'll use this information to add an escalation path to our sample scenario in the orchestrator function.
+
+# Exercise - Add a durable timer to manage a long-running task
+
+## Add moment npm package to your function app
+
+Before changing our workflow, we'll add the moment npm package to our function app through the console.
+
+1. Sign in to the Azure portal using the same account that you used to activate the sandbox.
+
+2. On the Azure portal menu or from the Home page, select All resources, and then select the function app that you created in the previous exercise.
+
+3. Under Development Tools, click Console.
+
+4. When the console window opens, verify that you are in the D:\home\site\wwwroot folder, then run the following command:
+
+```Bash
+npm install typescript
+npm install moment
+```
+
+These commands install the typescript and moment libraries. The moment library contains date/time functions that you can use with durable functions, and the typescript library is a dependency. These commands may take a few seconds to complete, and the node package manager may display some warnings that you can ignore.
+
+5. Wait until all packages have finished installing, then close the console window.
+
+## Add an escalation activity to your function app
+
+1. On the Azure portal menu or from the Home page, select All resources, and then select your function app.
+
+2. In the Azure portal, under Functions, click Functions, and then click + Add.
+
+3. Select the Durable Functions activity template. This template creates a durable function that is run when an Activity is called by an orchestrator function.
+
+4. Name the function Escalation, and then select Create Function.
+
+5. When the function is created, click Code + Test, and the code for the index.js file appears in the editor. Replace the existing code with the following code:
+
+6. When the function has been created, replace the code in index.js for this function with the following example:
+
+```Javascript
+module.exports = async function (context) {
+    return `ESCALATION : You have not approved the project design proposal - reassigning to your Manager!  ${context.bindings.name}!`;
+};
+```
+
+7. Select Save to save your new function.
+
+## Update the orchestration function to use the escalation function
+
+1. On the Azure portal menu or from the Home page, select All resources, and then select your function app.
+
+2. In the Azure portal, under Functions, click Functions, and then click your OrchFunction function that you created in the previous exercise.
+
+3. When the function is created, click Code + Test, and the code for the index.js file appears in the editor.
+
+4. Add a reference to the moment library:
+
+```Javascript
+const moment = require("moment");
+```
+
+5. Replace the body of the function with the following code, which will test whether the deadline for approval has passed:
+
+```Javascript
+module.exports = df.orchestrator(function* (context) {
+    const outputs = [];
+    const deadline = moment.utc(context.df.currentUtcDateTime).add(20, "s");
+    const activityTask = context.df.waitForExternalEvent("Approval");
+    const timeoutTask = context.df.createTimer(deadline.toDate());
+
+    const winner = yield context.df.Task.any([activityTask, timeoutTask]);
+    if (winner === activityTask) {
+        outputs.push(yield context.df.callActivity("Approval", "Approved"));
+    }
+    else
+    {
+        outputs.push(yield context.df.callActivity("Escalation", "Head of department"));
+    }
+
+    if (!timeoutTask.isCompleted) {
+        // All pending timers must be complete or canceled before the function exits.
+        timeoutTask.cancel();
+    }
+
+    return outputs;
+});
+```
+To keep things brief for the purposes of this exercise, if the Approval function doesn't respond within 20 seconds, the Escalation function is called. The code also changes the call to Approval to wait for an external input. This way we can control when the response comes back for testing purposes.
+
+6. Select Save.
+
+## Verify that the Durable Functions workflow starts
+
+1. On the Azure portal menu or from the Home page, select All resources, and then select your function app.
+
+2. Under Overview, click Restart, and then click Yes when prompted to restart. Wait for the restart to complete before continuing.
+
+3. Under Functions, click Functions, and then click your HttpStart function.
+
+4. Click Get Function URL, and copy the URL. Your URL should resemble the following example:
+
+5. Open a new browser window and navigate to the URL that you copied. In the URL, replace the {functionName} placeholder with OrchFunction, which should resemble the following example:
+
+```JSON
+{
+  "id": "f0e1d2c3b4a5968778695a4b3c2d1e0f",
+  "statusQueryGetUri": "https://example.azurewebsites.net/...",
+  "sendEventPostUri": "https://example.azurewebsites.net/...",
+  "terminatePostUri": "https://example.azurewebsites.net/...",
+  "rewindPostUri": "https://example.azurewebsites.net/...",
+  "purgeHistoryDeleteUri": "https://example.azurewebsites.net/..."
+}
+```
+
+6. Copy the statusQueryGetUri value, and use your web browser to navigate to this URL. You should see a response message that shows the status as Running while it is waiting for the timer to countdown to 20 seconds, which should resemble the following example:
+
+```JSON
+{
+  "name": "OrchFunction",
+  "instanceId": "f0e1d2c3b4a5968778695a4b3c2d1e0f",
+  "runtimeStatus": "Running",
+  "input": null,
+  "customStatus": null,
+  "output": null,
+  "createdTime": "2019-04-14T13:17:26Z",
+  "lastUpdatedTime": "2019-04-14T13:17:27Z"
+}
+```
+
+7. If you wait for 20 seconds and refresh the browser window, the timeout should have been reached, and the workflow will call the Escalate activity. You'll see a response that should resemble the following example:
+
+
+```JSON
+{
+    "name": "OrchFunction",
+    "instanceId": "f0e1d2c3b4a5968778695a4b3c2d1e0f",
+    "runtimeStatus": "Completed",
+    "input": null,
+    "customStatus": null,
+    "output": [
+        "ESCALATION : You have not approved the project design proposal - reassigning to your Manager!  Head of department!"
+    ],
+    "createdTime": "2019-04-14T13:43:09Z",
+    "lastUpdatedTime": "2019-04-14T13:43:31Z"
+}
+```
